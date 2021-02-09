@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "funmod",
+  "version": "${version}",
+
+  "name": "Fun Mod",
+  "description": "minecraft but fun",
+  "authors": [
+    "Me!"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.me.funmod.FunMod"
+    ],
+    "client": [
+      "com.me.funmod.FunClientMod"
+    ]
+  },
+  "mixins": [
+    "funmod.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.16.x"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

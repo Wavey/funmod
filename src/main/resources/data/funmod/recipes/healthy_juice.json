@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B",
+    " G"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:sugar"
+    },
+    "B": {
+      "item": "minecraft:beetroot"
+    },
+    "G": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": {
+    "item": "funmod:healthy_juice",
+    "count": 1
+  }
+}

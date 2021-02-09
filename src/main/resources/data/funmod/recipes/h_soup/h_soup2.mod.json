@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B#",
+    "#T#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:wheat_seeds"
+    },
+    "B": {
+      "item": "minecraft:birch_sapling"
+    },
+    "T": {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result": {
+    "item": "funmod:healthy_soup",
+    "count": 1
+  }
+}
