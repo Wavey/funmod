@@ -8,6 +8,7 @@
   "client": [
     "TestMixin",
     "BiomeFeaturesMixin"
+
   ],
   "injectors": {
     "defaultRequire": 1

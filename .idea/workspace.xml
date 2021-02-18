@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="81e2e4e1-1a77-470a-a363-3a4e11094be4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/rockzombie/RockZombie.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/rockzombie/RockZombieModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/rockzombie/RockZombieRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/mixins/RockZombiemixin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunClientMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunClientMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/zombie/NewZombieEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/zombie/NewZombieEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/funmod/textures/entity/newzombie.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/funmod/textures/entity/newzombie.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/funmod.mixins.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/funmod.mixins.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1oEOWqdXYxg1s8aZBKwrRQof1s9" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/build.gradle" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\finn\dev\funmod\src\main\resources\assets\funmod\textures\entity" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Minecraft Client" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="81e2e4e1-1a77-470a-a363-3a4e11094be4" name="Default Changelist" comment="" />
+      <created>1612848320723</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1612848320723</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/fabric-loom/1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2/minecraft-1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2-sources.jar!/net/minecraft/world/biome/Biome.java</url>
+          <line>136</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/fabric-loom/1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2/minecraft-1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2-sources.jar!/net/minecraft/world/SpawnHelper.java</url>
+          <line>92</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/fabric-loom/1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2/minecraft-1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2-sources.jar!/net/minecraft/world/SpawnHelper.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
