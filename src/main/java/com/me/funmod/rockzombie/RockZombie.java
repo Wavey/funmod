@@ -1,5 +1,6 @@
 package com.me.funmod.rockzombie;
 
+import com.me.funmod.FunMod;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.world.World;
 import net.minecraft.entity.EntityType;
@@ -10,8 +11,15 @@ public class RockZombie extends ZombieEntity {
     public RockZombie(EntityType<? extends ZombieEntity> entityType, World world) {
         super(entityType, world);
         {
+        }
     }
-}
+
+    public static void convertToRockZombie(ZombieEntity entity) {
+        if(!(entity instanceof RockZombie)) {
+            ZombieEntity zombieEntity = (ZombieEntity)entity.method_29243(FunMod.ROCKZOMBIE, true);
+        }
+
+    }
 
 
 

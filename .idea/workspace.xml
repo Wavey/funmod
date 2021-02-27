@@ -4,21 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="81e2e4e1-1a77-470a-a363-3a4e11094be4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/rockzombie/RockZombie.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/rockzombie/RockZombieModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/rockzombie/RockZombieRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/mixins/RockZombiemixin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunClientMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunClientMod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunMod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/zombie/NewZombieEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/zombie/NewZombieEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/funmod/textures/entity/newzombie.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/funmod/textures/entity/newzombie.png" afterDir="false" />
+    <list default="true" id="98986242-9ffc-4b85-a580-61e526785503" name="Default Changelist" comment="Initial version with newzombie and Healthy Soup">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/mixins/HungerManagerMixin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/mixins/PlayerEntityMixin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/rockzombie/RockZombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/rockzombie/RockZombie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/mixins/RockZombiemixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/mixins/RockZombiemixin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/funmod.mixins.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/funmod.mixins.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ElmWorkspace">
+    <elmProjects />
+    <settings elmCompilerPath="" elmFormatPath="" elmTestPath="" isElmFormatOnSaveEnabled="false" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -35,14 +36,36 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="InvalidFacetManager">
+    <ignored-facets>
+      <facet id="funmod.main/invalid/Minecraft" />
+      <facet id="funmod.test/invalid/Minecraft" />
+    </ignored-facets>
+  </component>
+  <component name="KotlinMultiplatform">
+    <allAvailableExecutables />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="heddpted" />
+  </component>
   <component name="ProjectId" id="1oEOWqdXYxg1s8aZBKwrRQof1s9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/build.gradle" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="org.elm.workspace.PROJECT_DISCOVERY" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
@@ -50,47 +73,74 @@
       <recent name="C:\Users\finn\dev\funmod\src\main\resources\assets\funmod\textures\entity" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Minecraft Client" />
+  <component name="RunManager" selected="Application.Minecraft Client">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="81e2e4e1-1a77-470a-a363-3a4e11094be4" name="Default Changelist" comment="" />
-      <created>1612848320723</created>
+      <changelist id="98986242-9ffc-4b85-a580-61e526785503" name="Default Changelist" comment="" />
+      <created>1612071117279</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1612848320723</updated>
+      <updated>1612071117279</updated>
+      <workItem from="1612317074249" duration="99000" />
+      <workItem from="1612317195758" duration="26000" />
+      <workItem from="1612317232925" duration="63000" />
+      <workItem from="1612317312767" duration="679000" />
+      <workItem from="1612318006796" duration="643000" />
+      <workItem from="1612318664233" duration="251000" />
+      <workItem from="1612318933410" duration="344000" />
+      <workItem from="1612320097981" duration="16000" />
+      <workItem from="1612322904306" duration="593000" />
+      <workItem from="1612404074666" duration="9308000" />
+      <workItem from="1612747591794" duration="10779000" />
+      <workItem from="1613106689829" duration="3289000" />
+      <workItem from="1613620440302" duration="4934000" />
+      <workItem from="1613701991190" duration="1844000" />
+      <workItem from="1613957521323" duration="1054000" />
+      <workItem from="1614052617419" duration="2469000" />
+      <workItem from="1614456299140" duration="4808000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial version with newzombie and Healthy Soup">
+      <created>1612847383553</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1612847383553</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial version with newzombie and Healthy Soup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial version with newzombie and Healthy Soup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint type="java-line">
-          <url>jar://$USER_HOME$/.gradle/caches/fabric-loom/1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2/minecraft-1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2-sources.jar!/net/minecraft/world/biome/Biome.java</url>
-          <line>136</line>
-          <option name="timeStamp" value="1" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/fabric-loom/1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2/minecraft-1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2.jar!/net/minecraft/entity/LivingEntity.class</url>
+          <line>920</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$USER_HOME$/.gradle/caches/fabric-loom/1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2/minecraft-1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2-sources.jar!/net/minecraft/world/SpawnHelper.java</url>
-          <line>92</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$USER_HOME$/.gradle/caches/fabric-loom/1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2/minecraft-1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2-sources.jar!/net/minecraft/world/SpawnHelper.java</url>
-          <line>83</line>
-          <option name="timeStamp" value="3" />
+          <url>jar://$USER_HOME$/.gradle/caches/fabric-loom/1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2/minecraft-1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2.jar!/net/minecraft/world/biome/Biome.class</url>
+          <line>113</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

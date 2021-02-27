@@ -4,11 +4,11 @@
   "package": "com.me.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "BiomeFeaturesMixin",
+    "PlayerEntityMixin"
   ],
   "client": [
-    "TestMixin",
-    "BiomeFeaturesMixin"
-
+    "TestMixin"
   ],
   "injectors": {
     "defaultRequire": 1
