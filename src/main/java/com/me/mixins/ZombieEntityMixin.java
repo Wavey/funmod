@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 abstract class ZombieEntityMixin extends HostileEntity{
     ZombieEntityMixin(EntityType<? extends ZombieEntity> entity, World world) {
         super(entity, world);
+        System.out.println("In constructior for ZombieEntityMixin");
     }
     @Shadow
     protected void convertTo(EntityType<? extends ZombieEntity> entityType) {}
@@ -25,14 +26,11 @@ abstract class ZombieEntityMixin extends HostileEntity{
 
     @Inject(at = @At("HEAD"), method = "tick()V", cancellable = true)
     private void onTick( CallbackInfo info) {
-        if(((ZombieEntity)(Object)this) instanceof RockZombie) {
-            info.cancel();
-            return;
-        }
         if (!this.world.isClient && this.isAlive() && !this.isAiDisabled()) {
-            System.out.println("inject is work");
+            if(((ZombieEntity)(Object)this) instanceof RockZombie) {
+                return;
+            }
             if(this.lastRenderY < 40.0f){
-                System.out.println("convert is called");
                 convertTo(FunMod.ROCKZOMBIE);
             }
         }
