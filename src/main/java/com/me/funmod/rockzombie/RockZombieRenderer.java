@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 
 public class RockZombieRenderer extends ZombieBaseEntityRenderer<RockZombie, RockZombieModel<RockZombie>> {
 
-    private static final Identifier TEXTURE = new Identifier("funmod:textures/entity/newzombie.png");
+    private static final Identifier TEXTURE = new Identifier("funmod:textures/entity/rock_zombie.png");
 
     public RockZombieRenderer(EntityRenderDispatcher entityRenderDispatcher) {
 

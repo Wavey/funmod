@@ -21,7 +21,7 @@ abstract class PlayerEntityMixin extends LivingEntity {
     private void onCanFoodHeal(CallbackInfoReturnable<Boolean> info) {
         if(info.getReturnValue()) {
             float health = this.getHealth();
-            boolean retval = health < 9.5f || health >= 10.24f;
+            boolean retval = health < 9.5f || health >= 10.5f;
             //System.out.println("Health = " + health + ", retval = " + retval);
             info.setReturnValue(retval);
         }

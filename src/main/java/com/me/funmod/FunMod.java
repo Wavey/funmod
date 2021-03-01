@@ -23,7 +23,7 @@ import net.minecraft.world.biome.BuiltinBiomes;
 import net.minecraft.world.biome.SpawnSettings;
 
 public class FunMod implements ModInitializer {
-    public static final Item HEALTHY_SOUP = new Item(new FabricItemSettings().group(ItemGroup.FOOD).maxCount(1).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().statusEffect(new StatusEffectInstance(StatusEffects.HUNGER,20*30),1).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION,20*4),1).statusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS,20*20),1).statusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,20*10),1).build()));
+    public static final Item HEALTHY_SOUP = new Item(new FabricItemSettings().group(ItemGroup.FOOD).maxCount(1).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().statusEffect(new StatusEffectInstance(StatusEffects.HUNGER,20*30),1).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION,20*4),0.5f).statusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS,20*20),1).statusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,20*10),1).build()));
     public static final Item HEALTHY_JUICE = new Item(new FabricItemSettings().group(ItemGroup.FOOD).maxCount(1).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().statusEffect(new StatusEffectInstance(StatusEffects.HUNGER,20*20),1).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION,20*4),1).statusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS,20*10),1).build()));
     public static final EntityType<NewZombieEntity> NEWZOMBIE = Registry.register(
             Registry.ENTITY_TYPE,

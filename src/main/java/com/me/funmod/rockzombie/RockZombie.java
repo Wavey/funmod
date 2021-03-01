@@ -29,6 +29,8 @@ public class RockZombie extends ZombieEntity {
 
                 EntityAttributes.GENERIC_ATTACK_DAMAGE, 15.0D).add(
                 EntityAttributes.GENERIC_ARMOR, 2.0D).add(
+                EntityAttributes.GENERIC_MAX_HEALTH, 40.0d).add(
                 EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
+
     }
 }
