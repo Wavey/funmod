@@ -15,9 +15,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(DefaultBiomeFeatures.class)
 public class BiomeFeaturesMixin {
-    @Inject(at = @At("HEAD"), method = "addMonsters(Lnet/minecraft/world/biome/SpawnSettings$Builder;III)V")
+    @Inject(at = @At("RETURN"), method = "addMonsters(Lnet/minecraft/world/biome/SpawnSettings$Builder;III)V")
     private static void addMonsters(SpawnSettings.Builder builder, int zw, int zv, int skel, CallbackInfo info) {
-        builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(FunMod.NEWZOMBIE, zw, 1, 2));
+        builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(FunMod.NEWZOMBIE, zw / 4, 1, 1));
         System.out.println("Adding newzombie to spawnsettings with weight " + zw);
     }
 
