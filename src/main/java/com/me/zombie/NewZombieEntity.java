@@ -24,8 +24,9 @@ public class NewZombieEntity extends ZombieEntity {
         return ZombieEntity.createZombieAttributes().add(
                 EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0D).add (
                 EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.33000000417232513D).add(
-                EntityAttributes.GENERIC_ATTACK_DAMAGE, 7.0D).add(
+                EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0D).add(
                 EntityAttributes.GENERIC_ARMOR, 2.0D).add(
+                EntityAttributes.GENERIC_MAX_HEALTH, 18).add(
                 EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
     }
 

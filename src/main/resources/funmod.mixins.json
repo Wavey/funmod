@@ -6,7 +6,8 @@
   "mixins": [
     "BiomeFeaturesMixin",
     "PlayerEntityMixin",
-    "ZombieEntityMixin"
+    "ZombieEntityMixin",
+    "SkeletonEntityMixin"
   ],
   "client": [
     "TestMixin"

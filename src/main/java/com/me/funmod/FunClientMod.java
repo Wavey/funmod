@@ -1,5 +1,6 @@
 package com.me.funmod;
 
+import com.me.funmod.DiamondZombie.DiamondZombieRenderer;
 import com.me.funmod.rockzombie.RockZombieRenderer;
 import com.me.zombie.NewZombieEntityRenderer;
 import net.fabricmc.api.ClientModInitializer;
@@ -16,6 +17,9 @@ public class FunClientMod implements ClientModInitializer {
         });
         EntityRendererRegistry.INSTANCE.register(FunMod.ROCKZOMBIE, (dispatcher, context) -> {
             return new RockZombieRenderer(dispatcher);
+        });
+        EntityRendererRegistry.INSTANCE.register(FunMod.DIAMONDZOMBIE, (dispatcher, context) -> {
+            return new DiamondZombieRenderer(dispatcher);
         });
     }
 }
