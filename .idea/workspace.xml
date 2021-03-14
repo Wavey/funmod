@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98986242-9ffc-4b85-a580-61e526785503" name="Default Changelist" comment="Initial version with newzombie and Healthy Soup">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/mixins/HungerManagerMixin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/mixins/PlayerEntityMixin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/Porjectiles/ZombieProjectile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/rockzombie/RockZombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/rockzombie/RockZombie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/mixins/RockZombiemixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/mixins/RockZombiemixin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/funmod.mixins.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/funmod.mixins.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/AI/DiamondZombieAIGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/AI/DiamondZombieAIGoal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/DiamondZombie/DiamondZombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/DiamondZombie/DiamondZombie.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,6 +123,18 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial version with newzombie and Healthy Soup" />
     <option name="LAST_COMMIT_MESSAGE" value="Initial version with newzombie and Healthy Soup" />
@@ -132,15 +142,20 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$USER_HOME$/.gradle/caches/fabric-loom/1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2/minecraft-1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2.jar!/net/minecraft/entity/LivingEntity.class</url>
-          <line>920</line>
-          <option name="timeStamp" value="4" />
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/rockzombie/RockZombie.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$USER_HOME$/.gradle/caches/fabric-loom/1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2/minecraft-1.16.5-mapped-net.fabricmc.yarn-1.16.5+build.1-v2.jar!/net/minecraft/world/biome/Biome.class</url>
-          <line>113</line>
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/DiamondZombie/DiamondZombie.java</url>
+          <line>85</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/AI/DiamondZombieAIGoal.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

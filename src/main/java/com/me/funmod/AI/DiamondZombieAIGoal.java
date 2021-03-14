@@ -1,22 +1,30 @@
 package com.me.funmod.AI;
 
+import com.me.funmod.DiamondZombie.DiamondZombie;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
 public class DiamondZombieAIGoal extends Goal {
 
-    protected MobEntity mob;
+    protected DiamondZombie mob;
     protected int decisionTimer;
     protected int teleportTimer;
     protected BlockPos teleportPos;
-    public DiamondZombieAIGoal(MobEntity mob) {
+    protected World world;
+    public DiamondZombieAIGoal(DiamondZombie mob) {
         super();
         this.mob = mob;
         resetTimers();
@@ -49,12 +57,17 @@ public class DiamondZombieAIGoal extends Goal {
 
     }
 
+
     protected void findPlayer() {
         PlayerEntity nearestPlayer = this.mob.world.getClosestPlayer(this.mob.getX(), this.mob.getY(), this.mob.getZ(), 100, false);
         if( nearestPlayer != null) {
             System.out.println("Found player... will teleport soon");
             this.teleportPos = nearestPlayer.getBlockPos();
+
             this.teleportTimer = 30;
+            this.mob.addEffect(ParticleTypes.HAPPY_VILLAGER, this.teleportPos, 20);
+        }else{
+            this.mob.canImmediatelyDespawn(100);
         }
     }
 
@@ -62,6 +75,7 @@ public class DiamondZombieAIGoal extends Goal {
         System.out.println("teleporting");
         this.mob.teleport(this.teleportPos.getX(), this.teleportPos.getY(), this.teleportPos.getZ());
         resetTimers();
+
     }
 
 }
