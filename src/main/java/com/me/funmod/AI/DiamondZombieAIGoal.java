@@ -65,7 +65,7 @@ public class DiamondZombieAIGoal extends Goal {
             this.teleportPos = nearestPlayer.getBlockPos();
 
             this.teleportTimer = 30;
-            this.mob.addEffect(ParticleTypes.HAPPY_VILLAGER, this.teleportPos, 20);
+            this.mob.sendPlayerSpawnEffect();
         }else{
             this.mob.canImmediatelyDespawn(100);
         }
