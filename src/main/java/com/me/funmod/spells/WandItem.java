@@ -74,4 +74,5 @@ public class WandItem extends Item {
             tooltip.add(new LiteralText(spells.get(0).getName() + " - " + spells.get(1).getName() + " - " + spells.get(2).getName()));
         }
     }
+
 }
