@@ -29,7 +29,8 @@ import java.time.ZoneId;
 
 public class WandItem extends Item {
     private static final Random random = new Random(Clock.systemDefaultZone().instant().getNano());
-    private static final List<String> names = Arrays.asList( "Boom", "Fizzle", "Hmm", "KABOOOOM", "Bzzzzz", "Zap", "Slap", "Pow!");
+   //private static final List<String> names = Arrays.asList( "Boom", "Fizzle", "Hmm", "KABOOOOM", "Bzzzzz", "Zap", "Slap", "Pow!");
+
     public WandItem( Item.Settings settings) {
         super(settings);
     }
@@ -39,7 +40,7 @@ public class WandItem extends Item {
 
         List<Spell> spells = WandItem.GetOrCreateSpells(itemStack, true);
         System.out.println("Casting: " + spells.get(0).getName() + " - " + spells.get(1).getName() + " - " + spells.get(2).getName());
-
+        spells.get(0).doTheThing(world,user);
         return TypedActionResult.pass(itemStack);
 
     }
@@ -53,13 +54,14 @@ public class WandItem extends Item {
             }
             // we need to put in some spells, since we have not already
             // initialized this yet
-            tag.put("spell1", new Spell(WandItem.names.get(random.nextInt(names.size() - 1))).toTag());
-            tag.put("spell2", new Spell(WandItem.names.get(random.nextInt(names.size() - 1))).toTag());
-            tag.put("spell3", new Spell(WandItem.names.get(random.nextInt(names.size() - 1))).toTag());
-            System.out.println("Empty wand.. adding spells");
+            //tag.put("spell1", new Spell(WandItem.names.get(random.nextInt(names.size() - 1))).toTag());
+            //tag.put("spell2", new Spell(WandItem.names.get(random.nextInt(names.size() - 1))).toTag());
+            //tag.put("spell3", new Spell(WandItem.names.get(random.nextInt(names.size() - 1))).toTag());
+            //System.out.println("Empty wand.. adding spells");
+            tag.put("spell1", new TestSpell("test").toTag());
         }
 
-        spells.add(Spell.fromTag(tag.getCompound("spell1")));
+        spells.add(TestSpell.fromTag(tag.getCompound("spell1")));
         spells.add(Spell.fromTag(tag.getCompound("spell2")));
         spells.add(Spell.fromTag(tag.getCompound("spell3")));
 
