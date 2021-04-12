@@ -1,4 +1,4 @@
-package com.me.funmod.DiamondZombie;
+package com.me.funmod.diamondzombie;
 
 import net.minecraft.client.render.entity.model.ZombieEntityModel;
 import net.minecraft.entity.mob.ZombieEntity;

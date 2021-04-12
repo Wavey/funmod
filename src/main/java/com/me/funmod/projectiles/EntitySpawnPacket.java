@@ -1,4 +1,4 @@
-package com.me.funmod.Porjectiles;
+package com.me.funmod.projectiles;
 
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;

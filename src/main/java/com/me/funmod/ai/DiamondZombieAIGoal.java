@@ -1,21 +1,10 @@
-package com.me.funmod.AI;
+package com.me.funmod.ai;
 
-import com.me.funmod.DiamondZombie.DiamondZombie;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import com.me.funmod.diamondzombie.DiamondZombie;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Predicate;
 
 public class DiamondZombieAIGoal extends Goal {
 

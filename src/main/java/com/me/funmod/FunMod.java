@@ -1,7 +1,6 @@
 package com.me.funmod;
 
-import com.me.funmod.DiamondZombie.DiamondZombie;
-import com.me.funmod.Porjectiles.ZombieProjectile;
+import com.me.funmod.diamondzombie.DiamondZombie;
 import com.me.funmod.rockzombie.RockZombie;
 import com.me.funmod.spells.WandItem;
 import com.me.zombie.NewZombieEntity;
@@ -12,18 +11,13 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.BiomeKeys;
-import net.minecraft.world.biome.BuiltinBiomes;
-import net.minecraft.world.biome.SpawnSettings;
 
 public class FunMod implements ModInitializer {
     public static final String ModID = "funmod"; // This is just so we can refer to our ModID easier.

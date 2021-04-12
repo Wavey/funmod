@@ -1,7 +1,7 @@
 package com.me.funmod;
 
-import com.me.funmod.DiamondZombie.DiamondZombieRenderer;
-import com.me.funmod.Porjectiles.EntitySpawnPacket;
+import com.me.funmod.diamondzombie.DiamondZombieRenderer;
+import com.me.funmod.projectiles.EntitySpawnPacket;
 import com.me.funmod.rockzombie.RockZombieRenderer;
 import com.me.zombie.NewZombieEntityRenderer;
 import net.fabricmc.api.ClientModInitializer;

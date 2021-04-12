@@ -1,4 +1,4 @@
-package com.me.funmod.Porjectiles;
+package com.me.funmod.projectiles;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -7,7 +7,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;

@@ -1,6 +1,6 @@
-package com.me.funmod.DiamondZombie;
+package com.me.funmod.diamondzombie;
 
-import com.me.funmod.AI.DiamondZombieAIGoal;
+import com.me.funmod.ai.DiamondZombieAIGoal;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.EntityType;
@@ -11,13 +11,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import java.lang.Math;
 
 public class DiamondZombie extends ZombieEntity {
     public DiamondZombie(EntityType<? extends ZombieEntity> entityType, World world) {

@@ -1,7 +1,5 @@
-package com.me.funmod.DiamondZombie;
+package com.me.funmod.diamondzombie;
 
-import com.me.funmod.DiamondZombie.DiamondZombie;
-import com.me.funmod.DiamondZombie.DiamondZombieModel;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.ZombieBaseEntityRenderer;
 import net.minecraft.util.Identifier;
