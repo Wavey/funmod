@@ -25,16 +25,11 @@ public class Spell {
     }
 
     public void doTheThing (World world, PlayerEntity player) {
-
-
-           // SnowballEntity snowballEntity = new SnowballEntity(world, player);
-            // snowballEntity.setProperties(player, player.pitch, player.yaw, 0.0F, 1.5F, 1.0F);
-           // world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_WOLF_DEATH, SoundCategory.NEUTRAL, 8,2);
-          //  world.spawnEntity(snowballEntity);
-
-
-
-        }
+        SnowballEntity snowballEntity = new SnowballEntity(world, player);
+        snowballEntity.setProperties(player, player.pitch, player.yaw, 0.0F, 1.5F, 1.0F);
+        world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_WOLF_DEATH, SoundCategory.NEUTRAL, 8,2);
+        world.spawnEntity(snowballEntity);
+    }
 
     public static Spell fromTag(CompoundTag tag) {
         return new Spell(tag.getString("name"));
