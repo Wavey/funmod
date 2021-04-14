@@ -3,6 +3,8 @@ package com.me.funmod;
 import com.me.funmod.diamondzombie.DiamondZombieRenderer;
 import com.me.funmod.projectiles.EntitySpawnPacket;
 import com.me.funmod.rockzombie.RockZombieRenderer;
+import com.me.funmod.spells.SpellProjectileEntity;
+import com.me.funmod.spells.SpellProjectileEntityRenderer;
 import com.me.zombie.NewZombieEntityRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -10,6 +12,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
@@ -32,6 +35,11 @@ public class FunClientMod implements ClientModInitializer {
         EntityRendererRegistry.INSTANCE.register(FunMod.DIAMONDZOMBIE, (dispatcher, context) -> {
             return new DiamondZombieRenderer(dispatcher);
         });
+        EntityRendererRegistry.INSTANCE.register(FunMod.SPELLPROJECTILEENTITY, (dispatcher, context) -> {
+            //return new SpellProjectileEntityRenderer(dispatcher);
+            return new FlyingItemEntityRenderer<SpellProjectileEntity>(dispatcher, context.getItemRenderer());
+        });
+        receiveEntityPacket();
     }
 
     public void receiveEntityPacket() {
