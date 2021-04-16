@@ -36,8 +36,8 @@ public class FunClientMod implements ClientModInitializer {
             return new DiamondZombieRenderer(dispatcher);
         });
         EntityRendererRegistry.INSTANCE.register(FunMod.SPELLPROJECTILEENTITY, (dispatcher, context) -> {
-            //return new SpellProjectileEntityRenderer(dispatcher);
-            return new FlyingItemEntityRenderer<SpellProjectileEntity>(dispatcher, context.getItemRenderer());
+            return new SpellProjectileEntityRenderer(dispatcher, context.getItemRenderer());
+            //return new FlyingItemEntityRenderer<SpellProjectileEntity>(dispatcher, context.getItemRenderer());
         });
         receiveEntityPacket();
     }

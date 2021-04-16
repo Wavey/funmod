@@ -1,5 +1,6 @@
 package com.me.funmod.spells;
 
+import com.me.funmod.FunMod;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;
@@ -14,6 +15,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.FlyingItemEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
@@ -45,7 +47,7 @@ public class SpellProjectileEntityRenderer extends EntityRenderer<SpellProjectil
             matrices.scale(this.scale, this.scale, this.scale);
             matrices.multiply(this.dispatcher.getRotation());
             matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
-            this.itemRenderer.renderItem(((SpellProjectileEntity)entity).getStack(), ModelTransformation.Mode.GROUND, light, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers);
+            this.itemRenderer.renderItem(entity.getStack(), ModelTransformation.Mode.GROUND, light, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers);
             matrices.pop();
             super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
         }

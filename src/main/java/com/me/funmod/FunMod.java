@@ -67,6 +67,7 @@ public class FunMod implements ModInitializer {
     @Override
     public void onInitialize() {
         Registry.register(Registry.ITEM, new Identifier("funmod","wand"),WAND);
+        Registry.register(Registry.ITEM, new Identifier("funmod","spell"),SPELL);
         Registry.register(Registry.ITEM, new Identifier("funmod", "healthy_soup"), HEALTHY_SOUP);
         Registry.register(Registry.ITEM, new Identifier("funmod", "healthy_juice"), HEALTHY_JUICE);
         FabricDefaultAttributeRegistry.register(NEWZOMBIE, NewZombieEntity.createZombieAttributes());

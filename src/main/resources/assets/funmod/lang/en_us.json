@@ -1,5 +1,6 @@
 {
   "item.funmod.healthy_soup": "Healthy soup",
   "item.funmod.healthy_juice": "Healthy juice",
-  "WandItem.funmod.wand": "Wand"
+  "WandItem.funmod.wand": "Wand",
+  "SpellItem.funmod.spell": "Spell"
 }
