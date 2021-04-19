@@ -1,5 +1,6 @@
 package com.me.funmod.spells;
 
+import com.me.funmod.projectiles.ZombieProjectile;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.ZombieEntity;
@@ -31,7 +32,7 @@ public class Spell {
         world.spawnEntity(snowballEntity);
     }
     public void doTheThing (World world, PlayerEntity player) {
-        SpellProjectileEntity spellProjectile = new SpellProjectileEntity(world, player);
+        ZombieProjectile spellProjectile = new ZombieProjectile(world, player);
         spellProjectile.setProperties(player, player.pitch, player.yaw, 0.0F, 1.5F, 1.0F);
         world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_WOLF_DEATH, SoundCategory.NEUTRAL, 8,2);
         world.spawnEntity(spellProjectile);

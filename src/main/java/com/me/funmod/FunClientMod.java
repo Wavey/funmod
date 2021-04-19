@@ -2,6 +2,7 @@ package com.me.funmod;
 
 import com.me.funmod.diamondzombie.DiamondZombieRenderer;
 import com.me.funmod.projectiles.EntitySpawnPacket;
+import com.me.funmod.projectiles.ZombieProjectileRenderer;
 import com.me.funmod.rockzombie.RockZombieRenderer;
 import com.me.funmod.spells.SpellProjectileEntity;
 import com.me.funmod.spells.SpellProjectileEntityRenderer;
@@ -39,6 +40,11 @@ public class FunClientMod implements ClientModInitializer {
             return new SpellProjectileEntityRenderer(dispatcher, context.getItemRenderer());
             //return new FlyingItemEntityRenderer<SpellProjectileEntity>(dispatcher, context.getItemRenderer());
         });
+        EntityRendererRegistry.INSTANCE.register(FunMod.ZOMBIEPROJECTILE, (dispatcher, context) -> {
+            return new ZombieProjectileRenderer(dispatcher, context.getItemRenderer());
+            //return new FlyingItemEntityRenderer<SpellProjectileEntity>(dispatcher, context.getItemRenderer());
+        });
+
         receiveEntityPacket();
     }
 

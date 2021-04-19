@@ -1,6 +1,7 @@
 package com.me.funmod;
 
 import com.me.funmod.diamondzombie.DiamondZombie;
+import com.me.funmod.projectiles.ZombieProjectile;
 import com.me.funmod.rockzombie.RockZombie;
 import com.me.funmod.spells.SpellItem;
 import com.me.funmod.spells.SpellProjectileEntity;
@@ -29,6 +30,7 @@ public class FunMod implements ModInitializer {
     public static final Item HEALTHY_SOUP = new Item(new FabricItemSettings().group(ItemGroup.FOOD).maxCount(1).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().statusEffect(new StatusEffectInstance(StatusEffects.HUNGER,20*30),1).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION,20*4),0.7f).statusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS,20*20),1).statusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,20*10),1).build()));
     public static final Item HEALTHY_JUICE = new Item(new FabricItemSettings().group(ItemGroup.FOOD).maxCount(1).food(new FoodComponent.Builder().hunger(0).saturationModifier(0f).alwaysEdible().statusEffect(new StatusEffectInstance(StatusEffects.HUNGER,20*20),1).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION,20*4),1).statusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS,20*10),1).build()));
     public static final Item SPELL = new SpellItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+    public static final Item ZOMBIEPROJECTILEITEM = new Item(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
     public static final EntityType<NewZombieEntity> NEWZOMBIE = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier("funmod", "newzombie"),
@@ -53,6 +55,12 @@ public class FunMod implements ModInitializer {
             FabricEntityTypeBuilder.<SpellProjectileEntity>create(SpawnGroup.MISC, SpellProjectileEntity::new).dimensions(
                     EntityDimensions.fixed(1.0f, 1.0f)).build()
     );
+    public static final EntityType<ZombieProjectile> ZOMBIEPROJECTILE = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("funmod", "zombieprojectile"),
+            FabricEntityTypeBuilder.<ZombieProjectile>create(SpawnGroup.MISC, ZombieProjectile::new).dimensions(
+                    EntityDimensions.fixed(1.0f, 1.0f)).build()
+    );
 //    public static final EntityType<ZombieProjectile> ZOMBIEPROJECTILE = Registry.register(
 //            Registry.ENTITY_TYPE,
 //            new Identifier("funmod","zombieprojectile"),
@@ -68,6 +76,7 @@ public class FunMod implements ModInitializer {
     public void onInitialize() {
         Registry.register(Registry.ITEM, new Identifier("funmod","wand"),WAND);
         Registry.register(Registry.ITEM, new Identifier("funmod","spell"),SPELL);
+        Registry.register(Registry.ITEM, new Identifier("funmod","zombieprojectile"),ZOMBIEPROJECTILEITEM);
         Registry.register(Registry.ITEM, new Identifier("funmod", "healthy_soup"), HEALTHY_SOUP);
         Registry.register(Registry.ITEM, new Identifier("funmod", "healthy_juice"), HEALTHY_JUICE);
         FabricDefaultAttributeRegistry.register(NEWZOMBIE, NewZombieEntity.createZombieAttributes());

@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98986242-9ffc-4b85-a580-61e526785503" name="Default Changelist" comment="Initial version with newzombie and Healthy Soup">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/TestSpell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/projectiles/ZombieProjectileRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/funmod/models/item/zombieprojectile.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/funmod/textures/item/zombieprojectile.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunClientMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunClientMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/ai/DiamondZombieAIGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/ai/DiamondZombieAIGoal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/projectiles/ZombieProjectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/projectiles/ZombieProjectile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/Spell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/Spell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/SpellItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/SpellItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/WandItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/WandItem.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,19 +171,14 @@
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/DiamondZombie/DiamondZombie.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/diamondzombie/DiamondZombie.java</url>
           <line>134</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/AI/DiamondZombieAIGoal.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/ai/DiamondZombieAIGoal.java</url>
           <line>67</line>
           <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/spells/TestSpell.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/spells/WandItem.java</url>
