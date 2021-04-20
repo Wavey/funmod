@@ -41,6 +41,7 @@ public class Spell {
     public static Spell fromTag(CompoundTag tag) {
         return new Spell(tag.getString("name"));
     }
+    public static final Spell EMPTY = new Spell("empty");
 
     public CompoundTag toTag() {
         CompoundTag tag = new CompoundTag();
