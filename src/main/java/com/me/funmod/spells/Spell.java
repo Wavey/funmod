@@ -15,6 +15,8 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class Spell {
     protected final String name;
     public Spell(String name) {
@@ -33,6 +35,13 @@ public class Spell {
     }
     public void doTheThing (World world, PlayerEntity player) {
         ZombieProjectile spellProjectile = new ZombieProjectile(world, player);
+        spellProjectile.setProperties(player, player.pitch, player.yaw, 0.0F, 1.5F, 1.0F);
+        world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_WOLF_DEATH, SoundCategory.NEUTRAL, 8,2);
+        world.spawnEntity(spellProjectile);
+    }
+
+    public static void spawnSpells(World world, PlayerEntity player, List<Spell> spells) {
+        SpellProjectileEntity spellProjectile = new SpellProjectileEntity(world, player, spells);
         spellProjectile.setProperties(player, player.pitch, player.yaw, 0.0F, 1.5F, 1.0F);
         world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_WOLF_DEATH, SoundCategory.NEUTRAL, 8,2);
         world.spawnEntity(spellProjectile);
