@@ -1,12 +1,17 @@
 package com.me.funmod.diamondzombie;
 
 import com.me.funmod.ai.DiamondZombieAIGoal;
+import com.me.funmod.ai.DiamondZombieMovementAI;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.goal.FleeEntityGoal;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.ZombieAttackGoal;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.particle.DefaultParticleType;
@@ -20,8 +25,7 @@ import net.minecraft.world.World;
 public class DiamondZombie extends ZombieEntity {
     public DiamondZombie(EntityType<? extends ZombieEntity> entityType, World world) {
         super(entityType, world);
-        {
-        }
+        this.moveControl = new DZMoveControl(this);
     }
     public static class Effect {
         public DefaultParticleType type;
@@ -55,13 +59,21 @@ public class DiamondZombie extends ZombieEntity {
             return new Effect(effect, pos, duration);
         }
     }
+    public static DefaultAttributeContainer.Builder createZombieAttributes() {
+        return ZombieEntity.createZombieAttributes().add(
+                EntityAttributes.GENERIC_MOVEMENT_SPEED, 1d);
+    }
+
+    public DZMoveControl getDzMoveControl() {
+        return (DZMoveControl)this.moveControl;
+    }
 
     protected Effect currentEffect = null;
 
     @Override
     protected void initGoals() {
+        this.goalSelector.add(2, new DiamondZombieMovementAI(this,1.22d,false,this));
 
-        this.goalSelector.add(2, new ZombieAttackGoal(this, 1.0D, false));
         this.goalSelector.add(2,new FollowTargetGoal(this, PlayerEntity.class,false));
         this.goalSelector.add(2,new DiamondZombieAIGoal(this));
 
@@ -93,6 +105,8 @@ public class DiamondZombie extends ZombieEntity {
         }
 
    }
+
+
 
         @Environment(EnvType.CLIENT)
     protected void runEffects() {

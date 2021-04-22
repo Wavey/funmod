@@ -2,12 +2,16 @@ package com.me.funmod.projectiles;
 
 import com.me.funmod.FunMod;
 import com.me.funmod.projectiles.EntitySpawnPacket;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FlyingItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.BlazeEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.network.Packet;
+import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
@@ -34,6 +38,12 @@ public class ZombieProjectile  extends ThrownItemEntity implements FlyingItemEnt
         if (!this.world.isClient) {
             this.remove();
         }
+    }
+
+    protected void onEntityHit(EntityHitResult entityHitResult) {
+        super.onEntityHit(entityHitResult);
+        Entity entity = entityHitResult.getEntity();
+        entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), 3);
     }
 
 }
