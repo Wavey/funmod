@@ -7,7 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 
 import net.minecraft.sound.SoundEvents;
 
-public class DiamondZombieMovementAI<T> extends ZombieAttackGoal {
+public class DiamondZombieMovementAI extends ZombieAttackGoal {
     private final DiamondZombie diamondZombie;
     public int shoottimer;
     public int metashoottimer;

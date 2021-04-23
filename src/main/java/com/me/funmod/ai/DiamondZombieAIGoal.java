@@ -48,7 +48,6 @@ public class DiamondZombieAIGoal extends Goal {
             if(this.teleportTimer == 0) {
                 teleportTime();
             }
-            return;
         }
     }
 
