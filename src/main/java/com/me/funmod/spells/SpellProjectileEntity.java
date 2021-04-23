@@ -4,6 +4,7 @@ import com.me.funmod.FunMod;
 import com.me.funmod.projectiles.EntitySpawnPacket;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FlyingItemEntity;
@@ -22,6 +23,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Util;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -35,6 +37,7 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
     private static final TrackedData<CompoundTag> OTHERSPELLS;
     private boolean amDead = false;
     private int aliveTimer = 0;
+    private int invicibilityTimer = 1;
     public SpellProjectileEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -73,26 +76,49 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
         return EntitySpawnPacket.create(this, FunMod.PacketID);
     }
 
-    protected void onCollision(HitResult hitResult) {
-        super.onCollision(hitResult);
+    protected void onBlockHit(BlockHitResult hitResult) {
+        super.onBlockHit(hitResult);
         if (!this.world.isClient) {
-            if(this.aliveTimer < 5) {
+            if(this.invicibilityTimer > 0) {
                 return;
             }
             Spell spell = this.getSpell();
-            System.out.println("Spell " + spell.getName() + " just died");
-            this.spawnNextSpell();
-            this.remove();
+            if(spell.blockCollision == Spell.BlockCollisionType.Die) {
+                System.out.println("Spell " + spell.getName() + " just died");
+                this.spawnNextSpell();
+                this.remove();
+            }
+            else if(spell.blockCollision == Spell.BlockCollisionType.Bounce) {
+                BlockHitResult hit = (BlockHitResult) hitResult;
+                Vec3d vel = this.getVelocity();
+                Vec3d reflectVel = new Vec3d(hit.getSide().getUnitVector());
+                Vec3d reflected = vel.subtract(reflectVel.multiply((2*vel.dotProduct(reflectVel))));
+                this.setVelocity(reflected);
+                this.invicibilityTimer = 1;
+
+            }
             //this.amDead = true;
         }
+
     }
 
     public void tick() {
         super.tick();
+        if(this.invicibilityTimer > 0) {
+            this.invicibilityTimer -= 1;
+        }
         this.aliveTimer += 1;
 
         if(this.world.isClient) {
             this.produceParticles(ParticleTypes.DRAGON_BREATH, this.getBlockPos());
+        }
+        else {
+            Spell spell = this.getSpell();
+            if(this.aliveTimer > spell.framesToLive) {
+                System.out.println("Spell " + spell.getName() + " just died");
+                this.spawnNextSpell();
+                this.remove();
+            }
         }
     }
 

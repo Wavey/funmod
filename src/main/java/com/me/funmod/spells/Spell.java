@@ -18,7 +18,14 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class Spell {
-    protected final String name;
+    protected String name;
+    public MovementType movementType = MovementType.Arc;
+    public BlockCollisionType blockCollision = BlockCollisionType.Bounce;
+    public EntityCollisionType entityCollision = EntityCollisionType.Damage;
+    public float initialSpeed = 1;
+    public float entityDamage = 1;
+    public int framesToLive = 80;
+
     public Spell(String name) {
         this.name = name;
     }
@@ -48,14 +55,41 @@ public class Spell {
     }
 
     public static Spell fromTag(CompoundTag tag) {
-        return new Spell(tag.getString("name"));
+
+        Spell spell = new Spell(tag.getString("name"));
+        spell.framesToLive = tag.getInt("framesToLive");
+        spell.entityCollision = EntityCollisionType.values()[tag.getInt("entityCollision")];
+        spell.blockCollision = BlockCollisionType.values()[tag.getInt("blockCollision")];
+        spell.movementType = MovementType.values()[tag.getInt("movementType")];
+        spell.initialSpeed = tag.getFloat("initialSpeed");
+        spell.entityDamage = tag.getFloat("entityDamage");
+        return spell;
     }
     public static final Spell EMPTY = new Spell("empty");
 
     public CompoundTag toTag() {
         CompoundTag tag = new CompoundTag();
         tag.putString("name", this.name);
+        tag.putInt("movementType", this.movementType.ordinal());
+        tag.putInt("blockCollision", this.blockCollision.ordinal());
+        tag.putInt("entityCollision", this.entityCollision.ordinal());
+        tag.putFloat("initialSpeed", this.initialSpeed);
+        tag.putFloat("entityDamage", this.entityDamage);
+        tag.putInt("framesToLive", this.framesToLive);
         return tag;
+    }
+    public enum MovementType {
+        Arc,
+        Line,
+        Straight
+    }
+    public enum BlockCollisionType {
+        Die,
+        Bounce
+    }
+    public enum EntityCollisionType {
+        Damage,
+        Die
     }
 
 }
