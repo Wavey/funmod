@@ -2,7 +2,6 @@ package com.me.funmod.spells;
 
 import com.me.funmod.FunMod;
 import com.me.funmod.projectiles.EntitySpawnPacket;
-import com.sun.javafx.geom.Vec3f;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.util.sat4j.core.Vec;
