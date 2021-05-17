@@ -1,4 +1,4 @@
-package com.me.funmod.spells;
+package com.me.funmod.general;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
