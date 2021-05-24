@@ -6,11 +6,15 @@ import com.me.funmod.projectiles.ZombieProjectileRenderer;
 import com.me.funmod.rockzombie.RockZombieRenderer;
 import com.me.funmod.spells.SpellProjectileEntity;
 import com.me.funmod.spells.SpellProjectileEntityRenderer;
+import com.me.funmod.wandstation.WandStationBlock;
+import com.me.funmod.wandstation.WandStationBlockScreen;
+import com.me.funmod.wandstation.WandStationGuiDescription;
 import com.me.zombie.NewZombieEntityRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
@@ -44,6 +48,9 @@ public class FunClientMod implements ClientModInitializer {
             return new ZombieProjectileRenderer(dispatcher, context.getItemRenderer());
             //return new FlyingItemEntityRenderer<SpellProjectileEntity>(dispatcher, context.getItemRenderer());
         });
+
+        ScreenRegistry.<WandStationGuiDescription, WandStationBlockScreen>register(FunMod.SCREEN_HANDLER_TYPE,
+                (gui, inventory, title) -> new WandStationBlockScreen(gui, inventory.player, title));
 
         receiveEntityPacket();
     }
