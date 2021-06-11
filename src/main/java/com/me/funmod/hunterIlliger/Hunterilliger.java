@@ -51,4 +51,8 @@ public class Hunterilliger extends PillagerEntity {
 
     }
 
+    public int getLimitPerChunk() {
+        return 5;
+    }
+
 }
