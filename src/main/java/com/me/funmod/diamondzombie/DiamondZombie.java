@@ -60,8 +60,8 @@ public class DiamondZombie extends ZombieEntity {
         }
     }
     public static DefaultAttributeContainer.Builder createZombieAttributes() {
-        return ZombieEntity.createZombieAttributes(); //.add(
-                //EntityAttributes.GENERIC_MOVEMENT_SPEED, .4d);
+        return ZombieEntity.createZombieAttributes() .add(
+                EntityAttributes.GENERIC_MAX_HEALTH, 175d);
     }
 
     public DZMoveControl getDzMoveControl() {
@@ -72,7 +72,7 @@ public class DiamondZombie extends ZombieEntity {
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(2, new DiamondZombieMovementAI(this,1.22d,false,this));
+        this.goalSelector.add(2, new DiamondZombieMovementAI(this,1.7d,false,this));
 
         this.goalSelector.add(2,new FollowTargetGoal<PlayerEntity>(this, PlayerEntity.class,false));
         this.goalSelector.add(2,new DiamondZombieAIGoal(this));

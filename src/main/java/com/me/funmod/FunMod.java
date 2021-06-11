@@ -1,6 +1,7 @@
 package com.me.funmod;
 
 import com.me.funmod.diamondzombie.DiamondZombie;
+import com.me.funmod.hunterIlliger.Hunterilliger;
 import com.me.funmod.projectiles.ZombieProjectile;
 import com.me.funmod.rockzombie.RockZombie;
 import com.me.funmod.spells.SpellItem;
@@ -61,6 +62,13 @@ public class FunMod implements ModInitializer {
             FabricEntityTypeBuilder.<ZombieProjectile>create(SpawnGroup.MISC, ZombieProjectile::new).dimensions(
                     EntityDimensions.fixed(1.0f, 1.0f)).build()
     );
+    public static final EntityType<Hunterilliger> HUNTERILLIGER = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("funmod", "hunterilliger"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, Hunterilliger::new).dimensions(
+                    EntityDimensions.fixed(1.0f, 2.0f)).build()
+            );
+
 //    public static final EntityType<ZombieProjectile> ZOMBIEPROJECTILE = Registry.register(
 //            Registry.ENTITY_TYPE,
 //            new Identifier("funmod","zombieprojectile"),
@@ -82,6 +90,7 @@ public class FunMod implements ModInitializer {
         FabricDefaultAttributeRegistry.register(NEWZOMBIE, NewZombieEntity.createZombieAttributes());
         FabricDefaultAttributeRegistry.register(ROCKZOMBIE, RockZombie.createZombieAttributes());
     FabricDefaultAttributeRegistry.register(DIAMONDZOMBIE, DiamondZombie.createZombieAttributes());
+    FabricDefaultAttributeRegistry.register(HUNTERILLIGER, Hunterilliger.createHostileAttributes());
 
         //BuiltinRegistries.BIOME.get(BiomeKeys.PLAINS).getSpawnSettings().getSpawnEntry(SpawnGroup.MONSTER).add(new SpawnSettings.SpawnEntry(NEWZOMBIE, 100, 2, 5));
         //Biomes.PLAINS.getEntitySpawnList(EntityCategory.Monster).add(new Biome.SpawnEntry(NEWZOMBIE, 100, 2, 5));

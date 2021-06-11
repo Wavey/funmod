@@ -13,7 +13,7 @@ public class DZMoveControl extends MoveControl {
             this.state = MoveControl.State.STRAFE;
             this.forwardMovement = forward;
             this.sidewaysMovement = sideways;
-            this.speed = 3f;
+            this.speed = 2.7f;
 
     }
 }

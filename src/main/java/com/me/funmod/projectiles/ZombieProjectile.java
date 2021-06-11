@@ -43,7 +43,7 @@ public class ZombieProjectile  extends ThrownItemEntity implements FlyingItemEnt
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         Entity entity = entityHitResult.getEntity();
-        entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), 3);
+        entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), 7);
     }
 
 }
