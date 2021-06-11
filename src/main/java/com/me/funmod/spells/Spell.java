@@ -20,14 +20,18 @@ import java.util.List;
 public class Spell {
     protected String name;
     public MovementType movementType = MovementType.Arc;
-    public BlockCollisionType blockCollision = BlockCollisionType.Bounce;
+    public BlockCollisionType blockCollision = BlockCollisionType.Destroy;
     public EntityCollisionType entityCollision = EntityCollisionType.Damage;
-    public float initialSpeed = 1;
+    public float initialSpeed = 1.5F;
     public float entityDamage = 1;
     public int framesToLive = 80;
 
     public Spell(String name) {
         this.name = name;
+        if(this.movementType == MovementType.Line) {
+            this.initialSpeed *= 10;
+            this.framesToLive = 1;
+        }
     }
 
     public String getName() {
@@ -49,7 +53,7 @@ public class Spell {
 
     public static void spawnSpells(World world, PlayerEntity player, List<Spell> spells) {
         SpellProjectileEntity spellProjectile = new SpellProjectileEntity(world, player, spells);
-        spellProjectile.setProperties(player, player.pitch, player.yaw, 0.0F, 1.5F, 1.0F);
+        spellProjectile.setProperties(player, player.pitch, player.yaw, 0.0F, 0.0F);
         world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_WOLF_DEATH, SoundCategory.NEUTRAL, 8,2);
         world.spawnEntity(spellProjectile);
     }
@@ -85,11 +89,13 @@ public class Spell {
     }
     public enum BlockCollisionType {
         Die,
-        Bounce
+        Bounce,
+        Destroy
     }
     public enum EntityCollisionType {
         Damage,
-        Die
+        Die,
+        Swap
     }
 
 }

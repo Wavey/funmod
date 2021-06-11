@@ -4,6 +4,7 @@ import com.me.funmod.FunMod;
 import com.me.funmod.projectiles.EntitySpawnPacket;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.util.sat4j.core.Vec;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -24,6 +25,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Util;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -37,6 +39,8 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
     private static final TrackedData<CompoundTag> OTHERSPELLS;
     private boolean amDead = false;
     private int aliveTimer = 0;
+    private int blocksHit = 0;
+    private BlockPos oldPos;
     private int invicibilityTimer = 1;
     public SpellProjectileEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);
@@ -58,6 +62,10 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
         System.out.println("Spawining spell " + this.getSpell().getName());
 
     }
+    public void setProperties(Entity user, float pitch, float yaw, float roll, float divergence) {
+        Spell spell = this.getSpell();
+        super.setProperties(user, pitch, yaw, roll, spell.initialSpeed, divergence);
+    }
 
     protected void initSpells(List<Spell> spells)
     {
@@ -76,6 +84,13 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
         return EntitySpawnPacket.create(this, FunMod.PacketID);
     }
 
+    protected void die() {
+        this.spawnNextSpell();
+        this.remove();
+        Spell spell = this.getSpell();
+        System.out.println("Spell " + spell.getName() + " just died");
+    }
+
     protected void onBlockHit(BlockHitResult hitResult) {
         super.onBlockHit(hitResult);
         if (!this.world.isClient) {
@@ -83,46 +98,89 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
                 return;
             }
             Spell spell = this.getSpell();
-            if(spell.blockCollision == Spell.BlockCollisionType.Die) {
-                System.out.println("Spell " + spell.getName() + " just died");
-                this.spawnNextSpell();
-                this.remove();
+            switch(spell.blockCollision) {
+                case Die:
+                    die();
+                    break;
+                case Bounce:
+                    Vec3d vel = this.getVelocity();
+                    Vec3d reflectVel = new Vec3d(hitResult.getSide().getUnitVector());
+                    Vec3d reflected = vel.subtract(reflectVel.multiply((2*vel.dotProduct(reflectVel))));
+                    this.setVelocity(reflected);
+                    this.invicibilityTimer = 1;
+                    break;
+                case Destroy:
+                    this.blocksHit += 1;
+                    if(this.blocksHit > 7) {
+                        die();
+                        return;
+                    }
+                    BlockPos pos = hitResult.getBlockPos();
+                    for(int x = -1; x < 2; x++) {
+                        for (int y = -1; y < 2; y++) {
+                            for (int z = -1; z < 3; z++) {
+                                this.world.breakBlock(pos.add(x, y, z), true);
+                            }
+                        }
+                    }
+                    break;
             }
-            else if(spell.blockCollision == Spell.BlockCollisionType.Bounce) {
-                BlockHitResult hit = (BlockHitResult) hitResult;
-                Vec3d vel = this.getVelocity();
-                Vec3d reflectVel = new Vec3d(hit.getSide().getUnitVector());
-                Vec3d reflected = vel.subtract(reflectVel.multiply((2*vel.dotProduct(reflectVel))));
-                this.setVelocity(reflected);
-                this.invicibilityTimer = 1;
-
-            }
-            //this.amDead = true;
         }
 
     }
 
+    protected void SwapOwnerWithEntity(EntityHitResult hitResult) {
+        Entity owner = this.getOwner();
+        if(owner == null) {
+            return;
+        }
+        Entity other = hitResult.getEntity();
+        Vec3d ownerPos = owner.getPos();
+        Vec3d otherPos = other.getPos();
+        owner.teleport(otherPos.x, otherPos.y, otherPos.z);
+        other.teleport(ownerPos.x, ownerPos.y, ownerPos.z);
+        System.out.println("Swapping player and entity");
+
+    }
+
+    protected void onEntityHit(EntityHitResult hitResult) {
+        Spell spell = this.getSpell();
+        switch (spell.entityCollision) {
+            case Swap:
+                this.SwapOwnerWithEntity(hitResult);
+                die();
+                break;
+            default:
+                break;
+        }
+    }
+
     public void tick() {
+        this.oldPos = this.getBlockPos();
         super.tick();
         if(this.invicibilityTimer > 0) {
             this.invicibilityTimer -= 1;
         }
         this.aliveTimer += 1;
+        Spell spell = this.getSpell();
 
         if(this.world.isClient) {
-            this.produceParticles(ParticleTypes.DRAGON_BREATH, this.getBlockPos());
+            if(spell.movementType == Spell.MovementType.Line) {
+                this.produceParticlesAlongLine(ParticleTypes.DRAGON_BREATH, this.oldPos, this.getBlockPos());
+            }
+            else {
+                this.produceParticlesFromPoint(ParticleTypes.DRAGON_BREATH, this.getBlockPos());
+            }
         }
         else {
-            Spell spell = this.getSpell();
             if(this.aliveTimer > spell.framesToLive) {
-                System.out.println("Spell " + spell.getName() + " just died");
-                this.spawnNextSpell();
-                this.remove();
+                die();
             }
         }
     }
-
     protected void spawnNextSpell() {
+    }
+    protected void spawnNextSpell_() {
         List<Spell> spells = this.getOtherSpells();
         if(!spells.isEmpty()) {
             SpellProjectileEntity spellProjectile = new SpellProjectileEntity(this.getX(), this.getY(), this.getZ(), this.world, this.getOwner(), this.getOtherSpells());
@@ -136,8 +194,27 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
     }
 
     @Environment(EnvType.CLIENT)
-    public void produceParticles(ParticleEffect parameters, BlockPos pos) {
+    public void produceParticlesFromPoint(ParticleEffect parameters, BlockPos pos) {
         for(int i = 0; i < 10; ++i) {
+            double d = this.random.nextGaussian() * 0.02D;
+            double e = this.random.nextGaussian() * 0.02D;
+            double f = this.random.nextGaussian() * 0.02D;
+            this.world.addParticle(parameters, pos.getX(), pos.getY(), pos.getZ(), d, e, f);
+        }
+
+    }
+
+    @Environment(EnvType.CLIENT)
+    public void produceParticlesAlongLine(ParticleEffect parameters, BlockPos posStart, BlockPos posEnd) {
+        Vector3f vStart = new Vector3f(posStart.getX(), posStart.getY(), posStart.getZ());
+        Vector3f vEnd = new Vector3f(posEnd.getX(), posEnd.getY(), posEnd.getZ());
+        Vector3f vDiff = vEnd.copy();
+        vDiff.subtract(vStart);
+        Vector3f pos;
+        for(int i = 0; i < 100; ++i) {
+
+            pos = vDiff.copy(); pos.scale((float)this.random.nextGaussian());
+            pos.add(vStart);
             double d = this.random.nextGaussian() * 0.02D;
             double e = this.random.nextGaussian() * 0.02D;
             double f = this.random.nextGaussian() * 0.02D;

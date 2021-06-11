@@ -40,7 +40,8 @@ public class WandItem extends Item {
 
         List<Spell> spells = WandItem.GetOrCreateSpells(itemStack, true);
         System.out.println("Casting: " + spells.get(0).getName() + " - " + spells.get(1).getName() + " - " + spells.get(2).getName());
-        spells.get(0).doTheThing(world,user);
+        //spells.get(0).doTheThing(world,user);
+        Spell.spawnSpells(world, user, spells);
         return TypedActionResult.pass(itemStack);
 
     }
