@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98986242-9ffc-4b85-a580-61e526785503" name="Default Changelist" comment="Initial version with newzombie and Healthy Soup">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/hunterIlliger/Hunterilliger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/hunterIlliger/HunterilligerModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/hunterIlliger/HunterilligerRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/funmod/textures/entity/Hunter_Pillager.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunClientMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunClientMod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunMod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/ai/DiamondZombieMovementAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/ai/DiamondZombieMovementAI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/diamondzombie/DZMoveControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/diamondzombie/DZMoveControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/diamondzombie/DiamondZombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/diamondzombie/DiamondZombie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/projectiles/ZombieProjectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/projectiles/ZombieProjectile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/hunterIlliger/Hunterilliger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/hunterIlliger/Hunterilliger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/me/mixins/BiomeFeaturesMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/mixins/BiomeFeaturesMixin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/mixins/SkeletonEntityMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/mixins/SkeletonEntityMixin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
