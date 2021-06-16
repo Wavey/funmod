@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FlyingItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -148,6 +149,13 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
         switch (spell.entityCollision) {
             case Swap:
                 this.SwapOwnerWithEntity(hitResult);
+                die();
+                break;
+            case Damage:
+                hitResult.getEntity().damage(DamageSource.GENERIC, spell.entityDamage);
+                die();
+                break;
+            case Die:
                 die();
                 break;
             default:

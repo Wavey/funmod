@@ -45,9 +45,21 @@ public class WandItem extends Item {
         return TypedActionResult.pass(itemStack);
 
     }
-    protected static List<Spell>GetOrCreateSpells(ItemStack itemStack, boolean createIfNeeded) {
-        ArrayList<Spell> spells = new ArrayList<Spell>();
-        CompoundTag tag = itemStack.getOrCreateSubTag("Spells");
+    private static List<Spell>GetOrCreateSpells(ItemStack wandStack, boolean createIfNeeded) {
+
+        ArrayList<Spell> spells = new ArrayList<>();
+        List<CompoundTag> spellTags = getSpellsAsTags(wandStack, createIfNeeded);
+        for(CompoundTag tag : spellTags) {
+            spells.add(Spell.fromTag(tag));
+        }
+
+        return spells;
+
+    }
+
+    public static List<CompoundTag> getSpellsAsTags(ItemStack wandStack, boolean createIfNeeded) {
+        ArrayList<CompoundTag> spells = new ArrayList<CompoundTag>();
+        CompoundTag tag = wandStack.getOrCreateSubTag("Spells");
         if(tag.isEmpty()) {
             if(! createIfNeeded) {
                 // don't create, just return
@@ -55,21 +67,17 @@ public class WandItem extends Item {
             }
             // we need to put in some spells, since we have not already
             // initialized this yet
-            tag.put("spell1", new Spell(WandItem.names.get(random.nextInt(names.size() - 1))).toTag());
-            tag.put("spell2", new Spell(WandItem.names.get(random.nextInt(names.size() - 1))).toTag());
-            tag.put("spell3", new Spell(WandItem.names.get(random.nextInt(names.size() - 1))).toTag());
-            //System.out.println("Empty wand.. adding spells");
-            //tag.put("spell1", new TestSpell("test").toTag());
+            tag.put("spell1", SpellFactory.getSpell(random.nextInt(5)).toTag());
+            tag.put("spell2", SpellFactory.getSpell(random.nextInt(5)).toTag());
+            tag.put("spell3", SpellFactory.getSpell(random.nextInt(5)).toTag());
         }
-
-        spells.add(Spell.fromTag(tag.getCompound("spell1")));
-        spells.add(Spell.fromTag(tag.getCompound("spell2")));
-        spells.add(Spell.fromTag(tag.getCompound("spell3")));
-
+        spells.add(tag.getCompound("spell1"));
+        spells.add(tag.getCompound("spell2"));
+        spells.add(tag.getCompound("spell3"));
         return spells;
 
-
     }
+
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         List<Spell> spells = WandItem.GetOrCreateSpells(stack, false);

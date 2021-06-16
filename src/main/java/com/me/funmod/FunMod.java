@@ -4,6 +4,7 @@ import com.me.funmod.diamondzombie.DiamondZombie;
 import com.me.funmod.hunterIlliger.Hunterilliger;
 import com.me.funmod.projectiles.ZombieProjectile;
 import com.me.funmod.rockzombie.RockZombie;
+import com.me.funmod.spells.SpellFactory;
 import com.me.funmod.spells.SpellItem;
 import com.me.funmod.spells.SpellProjectileEntity;
 import com.me.funmod.spells.WandItem;
@@ -34,6 +35,9 @@ import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FunMod implements ModInitializer {
     public static final String ModID = "funmod"; // This is just so we can refer to our ModID easier.
@@ -95,6 +99,7 @@ public class FunMod implements ModInitializer {
 //    );
 
 
+
     @Override
     public void onInitialize() {
         Registry.register(Registry.ITEM, new Identifier("funmod","wand"),WAND);
@@ -110,8 +115,10 @@ public class FunMod implements ModInitializer {
                 (syncId, inventory) -> new WandStationGuiDescription(syncId, inventory, ScreenHandlerContext.EMPTY));
         FabricDefaultAttributeRegistry.register(NEWZOMBIE, NewZombieEntity.createZombieAttributes());
         FabricDefaultAttributeRegistry.register(ROCKZOMBIE, RockZombie.createZombieAttributes());
-    FabricDefaultAttributeRegistry.register(HUNTERILLIGER, Hunterilliger.createHostileAttributes());
-    FabricDefaultAttributeRegistry.register(DIAMONDZOMBIE, DiamondZombie.createZombieAttributes());
+        FabricDefaultAttributeRegistry.register(HUNTERILLIGER, Hunterilliger.createHostileAttributes());
+        FabricDefaultAttributeRegistry.register(DIAMONDZOMBIE, DiamondZombie.createZombieAttributes());
+
+        SpellFactory.initSpells();
 
         //BuiltinRegistries.BIOME.get(BiomeKeys.PLAINS).getSpawnSettings().getSpawnEntry(SpawnGroup.MONSTER).add(new SpawnSettings.SpawnEntry(NEWZOMBIE, 100, 2, 5));
         //Biomes.PLAINS.getEntitySpawnList(EntityCategory.Monster).add(new Biome.SpawnEntry(NEWZOMBIE, 100, 2, 5));

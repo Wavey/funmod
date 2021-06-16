@@ -33,6 +33,33 @@ public class Spell {
             this.framesToLive = 1;
         }
     }
+    public Spell(String name, MovementType movementType, BlockCollisionType blockCollision, EntityCollisionType entityeCollision,
+                 float initialSpeed, float entityDamage, int framesToLive) {
+        this.name = name;
+        this.movementType = movementType;
+        this.blockCollision = blockCollision;
+        this.entityCollision = entityeCollision;
+        this.initialSpeed = initialSpeed;
+        this.entityDamage = entityDamage;
+        this.framesToLive = framesToLive;
+
+        if(this.movementType == MovementType.Line) {
+            this.initialSpeed *= 10;
+            this.framesToLive = 1;
+        }
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Spell)) {
+            return false;
+        }
+
+        Spell s = (Spell) o;
+        return (s.name.equals(this.name));
+    }
 
     public String getName() {
         return this.name;
