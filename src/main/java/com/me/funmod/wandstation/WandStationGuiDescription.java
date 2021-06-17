@@ -21,7 +21,7 @@ import java.util.List;
 
 public class WandStationGuiDescription extends SyncedGuiDescription {
     private static final int INVENTORY_SIZE=1;
-    private WandStationInventory wandInventory = new WandStationInventory(3);
+    private WandStationInventory wandInventory;
     private ItemStack wand;
 
 
@@ -47,17 +47,6 @@ public class WandStationGuiDescription extends SyncedGuiDescription {
         root.validate(this);
     }
     private void setupSpellInventory(WGridPanel root) {
-        List<CompoundTag> spells = WandItem.getSpellsAsTags(wand, true);
-        wandInventory = new WandStationInventory(spells.size());
-        DefaultedList<ItemStack> items = DefaultedList.ofSize(spells.size(), ItemStack.EMPTY);
-        for(int i = 0;i < spells.size(); i++) {
-            SpellItem spellItem = SpellFactory.spellItemFromSpell(Spell.fromTag(spells.get(i)));
-            items.set(i, new ItemStack(spellItem, 1));
-        }
-
-
-        wandInventory.setItems(items);
-
-
+        wandInventory = new WandStationInventory(WandItem.getOrCreateInventoryTag(wand, true));
     }
 }

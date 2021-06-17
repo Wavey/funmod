@@ -6,6 +6,7 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
@@ -38,49 +39,59 @@ public class WandItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
 
-        List<Spell> spells = WandItem.GetOrCreateSpells(itemStack, true);
+
+        List<Spell> spells = WandItem.getOrCreateSpells(itemStack, true);
         System.out.println("Casting: " + spells.get(0).getName() + " - " + spells.get(1).getName() + " - " + spells.get(2).getName());
         //spells.get(0).doTheThing(world,user);
         Spell.spawnSpells(world, user, spells);
         return TypedActionResult.pass(itemStack);
 
     }
-    private static List<Spell>GetOrCreateSpells(ItemStack wandStack, boolean createIfNeeded) {
 
-        ArrayList<Spell> spells = new ArrayList<>();
-        List<CompoundTag> spellTags = getSpellsAsTags(wandStack, createIfNeeded);
-        for(CompoundTag tag : spellTags) {
-            spells.add(Spell.fromTag(tag));
+    public static List<Spell> getOrCreateSpells(ItemStack wandStack, boolean createIfNeeded) {
+        ArrayList<Spell> spells = new ArrayList<Spell>();
+        DefaultedList<ItemStack> items = getOrCreateInventory(wandStack, createIfNeeded);
+        for(ItemStack item : items) {
+            SpellItem spellItem = (SpellItem) item.getItem();
+            Spell spell = SpellFactory.spellFromSpellItem(spellItem);
+            spells.add(spell);
         }
 
         return spells;
 
     }
-
-    public static List<CompoundTag> getSpellsAsTags(ItemStack wandStack, boolean createIfNeeded) {
-        ArrayList<CompoundTag> spells = new ArrayList<CompoundTag>();
-        CompoundTag tag = wandStack.getOrCreateSubTag("Spells");
-        if(tag.isEmpty()) {
-            if(! createIfNeeded) {
-                // don't create, just return
-                return spells;
-            }
-            // we need to put in some spells, since we have not already
-            // initialized this yet
-            tag.put("spell1", SpellFactory.getSpell(random.nextInt(5)).toTag());
-            tag.put("spell2", SpellFactory.getSpell(random.nextInt(5)).toTag());
-            tag.put("spell3", SpellFactory.getSpell(random.nextInt(5)).toTag());
+    public static DefaultedList<ItemStack> getOrCreateInventory(ItemStack wandStack, boolean createIfNeeded) {
+        CompoundTag inventoryTag = getOrCreateInventoryTag((wandStack), createIfNeeded);
+        if(inventoryTag.isEmpty()) {
+            return DefaultedList.ofSize(0, ItemStack.EMPTY);
         }
-        spells.add(tag.getCompound("spell1"));
-        spells.add(tag.getCompound("spell2"));
-        spells.add(tag.getCompound("spell3"));
-        return spells;
+        int size = inventoryTag.getInt("size");
+        DefaultedList<ItemStack> items = DefaultedList.ofSize(size, ItemStack.EMPTY);
+        Inventories.fromTag(inventoryTag.getCompound("items"), items);
+        return items;
+    }
+
+    public static CompoundTag getOrCreateInventoryTag(ItemStack wandStack, boolean createIfNeeded) {
+        CompoundTag tag = wandStack.getOrCreateSubTag("Inventory");
+        if(tag.isEmpty() && createIfNeeded) {
+            DefaultedList<ItemStack> items = DefaultedList.ofSize(random.nextInt(2) + 3, ItemStack.EMPTY );
+            for(int i = 0;i < items.size(); ++i) {
+                Item spellItem = SpellFactory.getSpellItem(random.nextInt(5));
+                ItemStack spellItemStack = new ItemStack(spellItem);
+                items.set(i, spellItemStack);
+            }
+            CompoundTag inventoryTag = new CompoundTag();
+            Inventories.toTag(inventoryTag, items, true);
+            tag.put("items", inventoryTag);
+            tag.putInt("size", items.size());
+        }
+        return tag;
 
     }
 
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        List<Spell> spells = WandItem.GetOrCreateSpells(stack, false);
+        List<Spell> spells = WandItem.getOrCreateSpells(stack, false);
         if(!spells.isEmpty()) {
             tooltip.add(new LiteralText(spells.get(0).getName() + " - " + spells.get(1).getName() + " - " + spells.get(2).getName()));
         }

@@ -83,6 +83,9 @@ public class SpellFactory {
         }
         return SPELL_ITEMS.get(index);
     }
+    public static SpellItem getSpellItem(int i) {
+        return SPELL_ITEMS.get(i);
+    }
     public static Spell getSpell(int i) {
         return spells.get(i);
     }
