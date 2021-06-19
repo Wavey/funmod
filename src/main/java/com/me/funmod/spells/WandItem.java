@@ -1,5 +1,7 @@
 package com.me.funmod.spells;
 
+import com.mojang.datafixers.Typed;
+import com.sun.jna.StringArray;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
@@ -41,20 +43,41 @@ public class WandItem extends Item {
 
 
         List<Spell> spells = WandItem.getOrCreateSpells(itemStack, true);
-        System.out.println("Casting: " + spells.get(0).getName() + " - " + spells.get(1).getName() + " - " + spells.get(2).getName());
+        if(spells.isEmpty()) {
+            System.out.println("Tried to fire an empty wand");
+            return TypedActionResult.pass(itemStack);
+        }
+
+
+        System.out.println("Casting: " + getSpellDebugNames(spells));
         //spells.get(0).doTheThing(world,user);
         Spell.spawnSpells(world, user, spells);
         return TypedActionResult.pass(itemStack);
 
     }
 
+    private static String getSpellDebugNames(List<Spell> spells) {
+        if(spells.isEmpty()) {
+            return "Empty";
+        }
+
+        ArrayList<String> spellNames = new ArrayList<String>(spells.size());
+        for(Spell s : spells) {
+            spellNames.add(s.getName());
+        }
+        return String.join(" - ", spellNames);
+    }
+
     public static List<Spell> getOrCreateSpells(ItemStack wandStack, boolean createIfNeeded) {
         ArrayList<Spell> spells = new ArrayList<Spell>();
         DefaultedList<ItemStack> items = getOrCreateInventory(wandStack, createIfNeeded);
-        for(ItemStack item : items) {
-            SpellItem spellItem = (SpellItem) item.getItem();
-            Spell spell = SpellFactory.spellFromSpellItem(spellItem);
-            spells.add(spell);
+        for(ItemStack itemStack : items) {
+            Item item = itemStack.getItem();
+            if(item instanceof SpellItem) {
+                SpellItem spellItem = (SpellItem) item;
+                Spell spell = SpellFactory.spellFromSpellItem(spellItem);
+                spells.add(spell);
+            }
         }
 
         return spells;
@@ -92,9 +115,7 @@ public class WandItem extends Item {
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         List<Spell> spells = WandItem.getOrCreateSpells(stack, false);
-        if(!spells.isEmpty()) {
-            tooltip.add(new LiteralText(spells.get(0).getName() + " - " + spells.get(1).getName() + " - " + spells.get(2).getName()));
-        }
+        tooltip.add(new LiteralText(getSpellDebugNames(spells)));
     }
 
 }

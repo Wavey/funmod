@@ -79,6 +79,9 @@ public class Spell {
     }
 
     public static void spawnSpells(World world, PlayerEntity player, List<Spell> spells) {
+        if(spells.size() == 0) {
+            return;
+        }
         SpellProjectileEntity spellProjectile = new SpellProjectileEntity(world, player, spells);
         spellProjectile.setProperties(player, player.pitch, player.yaw, 0.0F, 0.0F);
         world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_WOLF_DEATH, SoundCategory.NEUTRAL, 8,2);
