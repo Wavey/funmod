@@ -3,7 +3,11 @@ package com.me.mixins;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.registry.MutableRegistry;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -29,8 +33,12 @@ abstract class PlayerEntityMixin extends LivingEntity {
     }
     @Inject(at = @At("HEAD"), method = "tick()V", cancellable = true)
     private void onTick( CallbackInfo info) {
-        if(this.world.getDimension() == world.dimension.THE_NETHER_ID)
-        System.out.println(this.world.getDimension());
+
+        if(!this.world.isClient) {
+            if (this.world.getRegistryKey() == World.NETHER) {
+                System.out.println("In the nether");
+            }
+        }
     }
     @Inject(at = @At("RETURN"), method = "canFoodHeal()Z", cancellable = true)
     private void onCanFoodHeal(CallbackInfoReturnable<Boolean> info) {
