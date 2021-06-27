@@ -1,5 +1,6 @@
 package com.me.funmod;
 
+import com.me.funmod.NetherGuy.NetherGuy;
 import com.me.funmod.diamondzombie.DiamondZombie;
 import com.me.funmod.hunterIlliger.Hunterilliger;
 import com.me.funmod.projectiles.ZombieProjectile;
@@ -21,7 +22,6 @@ import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -35,9 +35,6 @@ import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FunMod implements ModInitializer {
     public static final String ModID = "funmod"; // This is just so we can refer to our ModID easier.
@@ -88,6 +85,13 @@ public class FunMod implements ModInitializer {
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, Hunterilliger::new).dimensions(
                     EntityDimensions.fixed(1.0f, 2.0f)).build()
             );
+    public  static final EntityType<NetherGuy> NETHERGUY = Registry.register(
+            Registry.ENTITY_TYPE,
+             new Identifier("funmod", "netherguy"),
+         FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, NetherGuy::new).dimensions(
+            EntityDimensions.fixed(1.0f, 2.0f)).build()
+
+    );
 
 //    public static final EntityType<ZombieProjectile> ZOMBIEPROJECTILE = Registry.register(
 //            Registry.ENTITY_TYPE,
@@ -117,6 +121,7 @@ public class FunMod implements ModInitializer {
         FabricDefaultAttributeRegistry.register(ROCKZOMBIE, RockZombie.createZombieAttributes());
         FabricDefaultAttributeRegistry.register(HUNTERILLIGER, Hunterilliger.createHostileAttributes());
         FabricDefaultAttributeRegistry.register(DIAMONDZOMBIE, DiamondZombie.createZombieAttributes());
+        FabricDefaultAttributeRegistry.register(NETHERGUY, NetherGuy.createHostileAttributes());
 
         SpellFactory.initSpells();
 

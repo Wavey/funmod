@@ -1,13 +1,12 @@
 package com.me.funmod;
 
+import com.me.funmod.NetherGuy.NetherGuyRenderer;
 import com.me.funmod.diamondzombie.DiamondZombieRenderer;
 import com.me.funmod.hunterIlliger.HunterilligerRenderer;
 import com.me.funmod.projectiles.EntitySpawnPacket;
 import com.me.funmod.projectiles.ZombieProjectileRenderer;
 import com.me.funmod.rockzombie.RockZombieRenderer;
-import com.me.funmod.spells.SpellProjectileEntity;
 import com.me.funmod.spells.SpellProjectileEntityRenderer;
-import com.me.funmod.wandstation.WandStationBlock;
 import com.me.funmod.wandstation.WandStationBlockScreen;
 import com.me.funmod.wandstation.WandStationGuiDescription;
 import com.me.zombie.NewZombieEntityRenderer;
@@ -18,7 +17,6 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
@@ -51,6 +49,9 @@ public class FunClientMod implements ClientModInitializer {
         });
         EntityRendererRegistry.INSTANCE.register(FunMod.HUNTERILLIGER, (dispatcher, context) -> {
             return new HunterilligerRenderer(dispatcher);
+        });
+        EntityRendererRegistry.INSTANCE.register(FunMod.NETHERGUY, (dispatcher, context) -> {
+            return new NetherGuyRenderer(dispatcher);
         });
 
         ScreenRegistry.<WandStationGuiDescription, WandStationBlockScreen>register(FunMod.SCREEN_HANDLER_TYPE,

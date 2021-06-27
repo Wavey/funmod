@@ -16,7 +16,22 @@ abstract class PlayerEntityMixin extends LivingEntity {
     PlayerEntityMixin(EntityType<? extends LivingEntity> entity, World world) {
         super(entity, world);
     }
-
+    public int nethertimer;
+    private void nethertimerticksubtract(){
+        if (nethertimer > 0){
+            nethertimer --;
+        }
+    }
+    private void nethertimertickadd(){
+        if (nethertimer < 1000){
+            nethertimer = nethertimer + 4;
+        }
+    }
+    @Inject(at = @At("HEAD"), method = "tick()V", cancellable = true)
+    private void onTick( CallbackInfo info) {
+        if(this.world.getDimension() == world.dimension.THE_NETHER_ID)
+        System.out.println(this.world.getDimension());
+    }
     @Inject(at = @At("RETURN"), method = "canFoodHeal()Z", cancellable = true)
     private void onCanFoodHeal(CallbackInfoReturnable<Boolean> info) {
         if(info.getReturnValue()) {

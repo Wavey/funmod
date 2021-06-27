@@ -42,7 +42,10 @@ public class Hunterilliger extends PillagerEntity {
         entity.playSound(SoundEvents.ITEM_CROSSBOW_SHOOT, 1.0F, 1.0F / (entity.getRandom().nextFloat() * 0.4F + 0.8F));
     }
     public static DefaultAttributeContainer.Builder createHostileAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_FOLLOW_RANGE,75);
+        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_FOLLOW_RANGE,75).add(
+        EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6);
+
+
     }
 
     @Override
