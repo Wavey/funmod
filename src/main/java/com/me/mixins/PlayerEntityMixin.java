@@ -36,7 +36,11 @@ abstract class PlayerEntityMixin extends LivingEntity {
 
         if(!this.world.isClient) {
             if (this.world.getRegistryKey() == World.NETHER) {
-                System.out.println("In the nether");
+                nethertimerticksubtract();
+
+                System.out.println(nethertimer);
+            }else{
+                nethertimertickadd();
             }
         }
     }
