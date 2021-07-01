@@ -121,7 +121,7 @@ public class FunMod implements ModInitializer {
         FabricDefaultAttributeRegistry.register(ROCKZOMBIE, RockZombie.createZombieAttributes());
         FabricDefaultAttributeRegistry.register(HUNTERILLIGER, Hunterilliger.createHostileAttributes());
         FabricDefaultAttributeRegistry.register(DIAMONDZOMBIE, DiamondZombie.createZombieAttributes());
-        FabricDefaultAttributeRegistry.register(NETHERGUY, NetherGuy.createHostileAttributes());
+        FabricDefaultAttributeRegistry.register(NETHERGUY, NetherGuy.createNetherGuyAttributes());
 
         SpellFactory.initSpells();
 
