@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98986242-9ffc-4b85-a580-61e526785503" name="Default Changelist" comment="Initial version with newzombie and Healthy Soup">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/ai/NetherGuyTargetGoal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/funmod/textures/entity/nether_guy.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/NetherGuy/NetherGuy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/NetherGuy/NetherGuy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/NetherGuy/NetherGuyRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/NetherGuy/NetherGuyRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/ai/NetherGuyAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/ai/NetherGuyAI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/me/mixins/PlayerEntityMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/mixins/PlayerEntityMixin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,8 +93,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\finn\dev\funmod\src\main\resources\assets\funmod\textures\item" />
       <recent name="C:\Users\finn\dev\funmod\src\main\resources\assets\funmod\textures\entity" />
+      <recent name="C:\Users\finn\dev\funmod\src\main\resources\assets\funmod\textures\item" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Minecraft Client">
@@ -172,11 +177,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/diamondzombie/DiamondZombie.java</url>
           <line>148</line>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/ai/DiamondZombieAIGoal.java</url>
-          <line>74</line>
-          <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/spells/WandItem.java</url>

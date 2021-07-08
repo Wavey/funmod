@@ -1,8 +1,10 @@
 package com.me.mixins;
 
+import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.MutableRegistry;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
@@ -16,9 +18,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
-abstract class PlayerEntityMixin extends LivingEntity {
-    PlayerEntityMixin(EntityType<? extends LivingEntity> entity, World world) {
-        super(entity, world);
+public abstract class PlayerEntityMixin extends PlayerEntity {
+    public PlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile profile) {
+    //PlayerEntityMixin(EntityType<? extends PlayerEntity> entity, World world, ABlockP) {
+        super( world, pos, yaw, profile);
     }
     public int nethertimer;
     private void nethertimerticksubtract(){
