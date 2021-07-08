@@ -1,4 +1,4 @@
-package com.me.zombie;
+package com.me.funmod.zombie;
 
 import net.minecraft.client.render.entity.*;
 import net.minecraft.util.Identifier;

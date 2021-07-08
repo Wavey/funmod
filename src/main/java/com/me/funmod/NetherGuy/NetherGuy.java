@@ -1,16 +1,11 @@
 package com.me.funmod.NetherGuy;
 
-import com.me.funmod.ai.DiamondZombieAIGoal;
-import com.me.funmod.ai.DiamondZombieMovementAI;
-import com.me.mixins.PlayerEntityMixin;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;

@@ -9,7 +9,7 @@ import com.me.funmod.rockzombie.RockZombieRenderer;
 import com.me.funmod.spells.SpellProjectileEntityRenderer;
 import com.me.funmod.wandstation.WandStationBlockScreen;
 import com.me.funmod.wandstation.WandStationGuiDescription;
-import com.me.zombie.NewZombieEntityRenderer;
+import com.me.funmod.zombie.NewZombieEntityRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

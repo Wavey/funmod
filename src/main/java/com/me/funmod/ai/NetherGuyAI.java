@@ -23,7 +23,7 @@ public class NetherGuyAI extends Goal {
         this.teleportTimer = 0;
     }
     public void tick() {
-        if
+        //if
 
     }
 

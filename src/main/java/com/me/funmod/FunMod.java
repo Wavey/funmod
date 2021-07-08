@@ -12,7 +12,7 @@ import com.me.funmod.spells.WandItem;
 import com.me.funmod.wandstation.WandStationBlock;
 import com.me.funmod.wandstation.WandStationBlockEntity;
 import com.me.funmod.wandstation.WandStationGuiDescription;
-import com.me.zombie.NewZombieEntity;
+import com.me.funmod.zombie.NewZombieEntity;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;

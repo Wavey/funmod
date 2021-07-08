@@ -1,4 +1,4 @@
-package com.me.mixins;
+package com.me.funmod.mixins;
 
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;

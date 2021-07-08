@@ -1,4 +1,4 @@
-package com.me.mixins;
+package com.me.funmod.mixins;
 
 import com.me.funmod.diamondzombie.DiamondZombie;
 import com.me.funmod.FunMod;

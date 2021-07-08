@@ -1,7 +1,5 @@
 package com.me.funmod.rockzombie;
 
-import com.me.zombie.NewZombieEntity;
-import com.me.zombie.NewZombieEntityModel;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.ZombieBaseEntityRenderer;
 import net.minecraft.util.Identifier;

@@ -1,9 +1,8 @@
-package com.me.mixins;
+package com.me.funmod.mixins;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.BowAttackGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.SkeletonEntity;

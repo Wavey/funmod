@@ -1,27 +1,20 @@
-package com.me.mixins;
+package com.me.funmod.mixins;
 
-import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.MutableRegistry;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends PlayerEntity {
-    public PlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile profile) {
-    //PlayerEntityMixin(EntityType<? extends PlayerEntity> entity, World world, ABlockP) {
-        super( world, pos, yaw, profile);
+public abstract class PlayerEntityMixin extends LivingEntity {
+    //public PlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile profile) {
+    PlayerEntityMixin(EntityType<? extends PlayerEntity> entity, World world) {
+        super( entity, world);
     }
     public int nethertimer;
     private void nethertimerticksubtract(){

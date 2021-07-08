@@ -1,11 +1,7 @@
-package com.me.mixins;
+package com.me.funmod.mixins;
 
 import com.me.funmod.FunMod;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import org.spongepowered.asm.mixin.Mixin;
