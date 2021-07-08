@@ -1,5 +1,6 @@
 package com.me.funmod.mixins;
 
+import com.me.funmod.general.PlayerEntityNetherInterface;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity {
+public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEntityNetherInterface {
     //public PlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile profile) {
     PlayerEntityMixin(EntityType<? extends PlayerEntity> entity, World world) {
         super( entity, world);
@@ -27,6 +28,11 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             nethertimer = nethertimer + 4;
         }
     }
+
+    public int getNetherTimer() {
+        return nethertimer;
+    }
+
     @Inject(at = @At("HEAD"), method = "tick()V", cancellable = true)
     private void onTick( CallbackInfo info) {
 

@@ -1,5 +1,7 @@
 package com.me.funmod.NetherGuy;
 
+import com.me.funmod.general.PlayerEntityNetherInterface;
+import com.me.funmod.mixins.PlayerEntityMixin;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
@@ -32,18 +34,18 @@ public class NetherGuy extends WitherSkeletonEntity {
     }
     public class PlayerPredicate implements Predicate<LivingEntity> {
         public boolean test (LivingEntity t) {
+            PlayerEntityNetherInterface player = (PlayerEntityNetherInterface) t;
+            if(player == null) {
+                return false;
+            }
+            int nethertimer = player.getNetherTimer();
+            System.out.printf("Checking player entity with nether timer of %d \n", nethertimer);
+            if(nethertimer > 0) {
+                System.out.println("Not adding");
+                return false;
+            }
+            System.out.println("Adding");
             return true;
-            //PlayerEntityMixin player = (PlayerEntityMixin)t;
-            //if(player == null) {
-            //    return false;
-            //}
-            //System.out.printf("Checking player entity with nether timer of %d \n", player.nethertimer);
-            //if(player.nethertimer > 0) {
-            //    System.out.println("Not adding");
-            //    return false;
-            //}
-            //System.out.println("Adding");
-            //return true;
         }
     }
 
