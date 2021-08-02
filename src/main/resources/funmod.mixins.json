@@ -10,7 +10,8 @@
     "SkeletonEntityMixin"
   ],
   "client": [
-    "TestMixin"
+    "TestMixin",
+    "Hudmixin"
   ],
   "injectors": {
     "defaultRequire": 1

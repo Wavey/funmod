@@ -1,5 +1,6 @@
 package com.me.funmod.NetherGuy;
 
+import com.me.funmod.ai.NetherGuyTargetGoal;
 import com.me.funmod.general.PlayerEntityNetherInterface;
 import com.me.funmod.mixins.PlayerEntityMixin;
 import net.minecraft.entity.EntityType;
@@ -28,7 +29,7 @@ public class NetherGuy extends WitherSkeletonEntity {
     protected void initGoals() {
 
         this.goalSelector.add(2,
-                new FollowTargetGoal<PlayerEntity>(this, PlayerEntity.class,10,
+                new NetherGuyTargetGoal<PlayerEntity>(this, PlayerEntity.class,10,
                                         false,false, new PlayerPredicate()));
 
     }

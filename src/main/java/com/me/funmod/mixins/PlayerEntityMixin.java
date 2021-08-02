@@ -40,7 +40,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
             if (this.world.getRegistryKey() == World.NETHER) {
                 nethertimerticksubtract();
 
-                System.out.println(nethertimer);
+                //System.out.println(nethertimer);
             }else{
                 nethertimertickadd();
             }

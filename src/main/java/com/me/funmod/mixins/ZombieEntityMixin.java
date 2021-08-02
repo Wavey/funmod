@@ -8,6 +8,7 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.mob.ZombifiedPiglinEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -29,7 +30,7 @@ abstract class ZombieEntityMixin extends HostileEntity{
     @Inject(at = @At("HEAD"), method = "tick()V", cancellable = true)
     private void onTick( CallbackInfo info) {
         if (!this.world.isClient && this.isAlive() && !this.isAiDisabled()) {
-            if(((ZombieEntity)(Object)this) instanceof RockZombie || ((ZombieEntity)(Object)this) instanceof DiamondZombie) {
+            if(((ZombieEntity)(Object)this) instanceof RockZombie || ((ZombieEntity)(Object)this) instanceof DiamondZombie || ((ZombieEntity)(Object)this) instanceof ZombifiedPiglinEntity || this.world.getRegistryKey() == World.NETHER) {
                 return;
             }
             if(this.lastRenderY < 40.0f &&  this.isBaby() != true){
