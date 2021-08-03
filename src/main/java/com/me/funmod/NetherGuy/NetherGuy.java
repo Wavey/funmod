@@ -40,12 +40,12 @@ public class NetherGuy extends WitherSkeletonEntity {
                 return false;
             }
             int nethertimer = player.getNetherTimer();
-            System.out.printf("Checking player entity with nether timer of %d \n", nethertimer);
+            //System.out.printf("Checking player entity with nether timer of %d \n", nethertimer);
             if(nethertimer > 0) {
-                System.out.println("Not adding");
+                //System.out.println("Not adding");
                 return false;
             }
-            System.out.println("Adding");
+            //System.out.println("Adding");
             return true;
         }
     }

@@ -1,9 +1,7 @@
 package com.me.funmod.mixins;
 
 import com.me.funmod.rockzombie.RockZombie;
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.entity.mob.ZombifiedPiglinEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
