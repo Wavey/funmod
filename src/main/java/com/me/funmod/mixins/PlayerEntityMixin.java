@@ -1,9 +1,15 @@
 package com.me.funmod.mixins;
 
 import com.me.funmod.general.PlayerEntityNetherInterface;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,19 +24,29 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
         super( entity, world);
     }
     public int nethertimer;
+    private static TrackedData<Integer> NETHER_TIMER;
     private void nethertimerticksubtract(){
+        int nethertimer = this.getNetherTimer();
         if (nethertimer > 0){
-            nethertimer --;
+            this.setNetherTimer(nethertimer - 1);
         }
     }
     private void nethertimertickadd(){
+        int nethertimer = this.getNetherTimer();
         if (nethertimer < 1000){
-            nethertimer = nethertimer + 4;
+            this.setNetherTimer(nethertimer + 4);
         }
     }
 
+    static {
+        NETHER_TIMER = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    }
+
     public int getNetherTimer() {
-        return nethertimer;
+        return (Integer)this.dataTracker.get(NETHER_TIMER);
+    }
+    public void setNetherTimer(int value) {
+        this.dataTracker.set(NETHER_TIMER, value);
     }
 
     @Inject(at = @At("HEAD"), method = "tick()V", cancellable = true)
@@ -55,5 +71,12 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
             info.setReturnValue(retval);
         }
     }
+
+    @Inject(at = @At("HEAD"), method = "initDataTracker()V", cancellable = true)
+    protected void initDataTracker(CallbackInfo info) {
+        this.dataTracker.startTracking(NETHER_TIMER, 0);
+    }
+
+
 
 }
