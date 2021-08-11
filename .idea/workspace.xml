@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98986242-9ffc-4b85-a580-61e526785503" name="Default Changelist" comment="Initial version with newzombie and Healthy Soup">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries-with-intellij-classes.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/Hudmixin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/funmod/textures/gui/blueshield_hud.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/CowMixin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/funmod/textures/gui/shield_9_hud.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/NetherGuy/NetherGuy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/NetherGuy/NetherGuy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/ai/NetherGuyTargetGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/ai/NetherGuyTargetGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/PlayerEntityMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/PlayerEntityMixin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/RockZombiemixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/RockZombiemixin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/ZombieEntityMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/ZombieEntityMixin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/funmod/textures/entity/nether_guy.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/funmod/textures/entity/nether_guy.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/Hudmixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/Hudmixin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/funmod.mixins.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/funmod.mixins.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -173,11 +167,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/rockzombie/RockZombie.java</url>
           <line>36</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/diamondzombie/DiamondZombie.java</url>
-          <line>148</line>
-          <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/me/funmod/spells/WandItem.java</url>

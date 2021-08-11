@@ -7,7 +7,8 @@
     "BiomeFeaturesMixin",
     "PlayerEntityMixin",
     "ZombieEntityMixin",
-    "SkeletonEntityMixin"
+    "SkeletonEntityMixin",
+    "CowMixin"
   ],
   "client": [
     "TestMixin",
