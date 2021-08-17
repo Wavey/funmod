@@ -28,7 +28,6 @@ public abstract class Hudmixin extends DrawableHelper  {
 
 
 
-    private static final Identifier GUI_ICONS = new Identifier("textures/gui/icons.png");
     private static final Identifier BLUE_SHIELD = new Identifier(FunMod.ModID + ":textures/gui/shield_9_hud.png");
 
 
@@ -37,10 +36,10 @@ public abstract class Hudmixin extends DrawableHelper  {
     private void renderer( MatrixStack matrices, float f,CallbackInfo info) {
         this.client.getTextureManager().bindTexture(BLUE_SHIELD);
         PlayerEntity playerEntity = this.getCameraPlayer();
-         int scale = this.scaledWidth/2+91-9;
+        int scale = this.scaledWidth/2+91-9;
         int offset =0;
         PlayerEntityNetherInterface netherInterface = (PlayerEntityNetherInterface) playerEntity;
-        System.out.println(netherInterface.getNetherTimer());
+        //System.out.println(netherInterface.getNetherTimer());
         //int loop = (netherInterface.getNetherTimer() * 10 +1)/1000 ;
         int loop = (int)Math.ceil(((float)netherInterface.getNetherTimer()) / 100.0);
         if (playerEntity.world.getRegistryKey() == World.NETHER)

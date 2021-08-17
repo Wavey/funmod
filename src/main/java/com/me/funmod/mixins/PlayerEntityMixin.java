@@ -1,5 +1,6 @@
 package com.me.funmod.mixins;
 
+import com.me.funmod.NetherGuy.NetherGuy;
 import com.me.funmod.general.PlayerEntityNetherInterface;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -55,6 +56,9 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
         if(!this.world.isClient) {
             if (this.world.getRegistryKey() == World.NETHER) {
                 nethertimerticksubtract();
+                if(getNetherTimer() == 0) {
+                    NetherGuy.spawnNewGuy(this);
+                }
 
                 //System.out.println(nethertimer);
             }else{
