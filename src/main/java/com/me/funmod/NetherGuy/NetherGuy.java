@@ -7,6 +7,7 @@ import com.me.funmod.mixins.PlayerEntityMixin;
 import net.minecraft.client.render.SkyProperties;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -14,11 +15,13 @@ import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.World;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.function.Predicate;
+import java.util.Random;
 
 public class NetherGuy extends WitherSkeletonEntity {
     public NetherGuy(EntityType<? extends NetherGuy> entityType, World world) {
@@ -29,9 +32,13 @@ public class NetherGuy extends WitherSkeletonEntity {
             System.out.println("Nether guy created");
         }
     }
+    private static Random random = new Random();
     public static DefaultAttributeContainer.Builder createNetherGuyAttributes() {
         return AbstractSkeletonEntity.createAbstractSkeletonAttributes().add(EntityAttributes.GENERIC_FOLLOW_RANGE,75).add(
-                EntityAttributes.GENERIC_MOVEMENT_SPEED, .3);
+                EntityAttributes.GENERIC_MOVEMENT_SPEED, .3).add(
+                EntityAttributes.GENERIC_MAX_HEALTH, 125d).add(
+                EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.5d);
+
 
 
     }
@@ -73,16 +80,49 @@ public class NetherGuy extends WitherSkeletonEntity {
 
     }
 
+
+    public static int findlocation(int pos){
+       int r = random.nextInt(16) + 16;
+        if (random.nextInt(2) == 0){
+            r = r*-1;
+
+
+        }
+        return r + pos;
+    }
+
+    public static int findlocationY(int pos){
+        int r = random.nextInt(10);
+        if (random.nextInt(2) == 0){
+            r = r*-1;
+
+
+        }
+        return r + pos;
+    }
     // Handle spawning
     public static boolean spawnNewGuy(LivingEntity player) {
         if (canSpawnNetherGuy() ) {
-            NetherGuy guy = FunMod.NETHERGUY.create(player.world);
+
             BlockPos pos = player.getBlockPos();
-            pos.add(0,0,1);
-            guy.updatePosition(pos.getX(), pos.getY(), pos.getZ());
-            player.world.spawnEntity(guy);
-            System.out.println("Spawning new Nether guy");
-            return true;
+            int y = findlocationY(pos.getY());
+            int x = findlocation(pos.getX());
+            int z = findlocation(pos.getZ());
+
+            BlockPos pos2 = new BlockPos(x,y,z);
+            if( (SpawnHelper.canSpawn(SpawnRestriction.Location.ON_GROUND, player.world, pos2, EntityType.WITHER_SKELETON))){
+                NetherGuy guy = FunMod.NETHERGUY.create(player.world);
+                guy.updatePosition(pos2.getX(), pos2.getY(), pos2.getZ());
+
+                player.world.spawnEntity(guy);
+                System.out.println("Spawning new Nether guy");
+                return true;
+            }else{
+                System.out.println("failed to find spawn point");
+
+                return false;
+            }
+
         }
 
         return false;

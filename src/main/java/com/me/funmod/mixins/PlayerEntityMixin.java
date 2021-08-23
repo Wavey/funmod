@@ -34,7 +34,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
     }
     private void nethertimertickadd(){
         int nethertimer = this.getNetherTimer();
-        if (nethertimer < 1000){
+        if (nethertimer < 6000){
             this.setNetherTimer(nethertimer + 4);
         }
     }

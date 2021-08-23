@@ -41,7 +41,7 @@ public abstract class Hudmixin extends DrawableHelper  {
         PlayerEntityNetherInterface netherInterface = (PlayerEntityNetherInterface) playerEntity;
         //System.out.println(netherInterface.getNetherTimer());
         //int loop = (netherInterface.getNetherTimer() * 10 +1)/1000 ;
-        int loop = (int)Math.ceil(((float)netherInterface.getNetherTimer()) / 100.0);
+        int loop = (int)Math.ceil((((float)netherInterface.getNetherTimer()) / 100.0) / 6.0 );
         if (playerEntity.world.getRegistryKey() == World.NETHER)
 
             while (loop > 0)  {
