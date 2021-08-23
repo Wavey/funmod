@@ -4,6 +4,8 @@ import com.me.funmod.FunMod;
 import com.me.funmod.ai.NetherGuyTargetGoal;
 import com.me.funmod.general.PlayerEntityNetherInterface;
 import com.me.funmod.mixins.PlayerEntityMixin;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.SkyProperties;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -11,9 +13,14 @@ import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.World;
@@ -32,7 +39,9 @@ public class NetherGuy extends WitherSkeletonEntity {
             System.out.println("Nether guy created");
         }
     }
-    private static Random random = new Random();
+    protected static TrackedData<BlockPos> TELEPORT_POS;
+    protected static TrackedData<Integer> TELEPORT_TIMER;
+
     public static DefaultAttributeContainer.Builder createNetherGuyAttributes() {
         return AbstractSkeletonEntity.createAbstractSkeletonAttributes().add(EntityAttributes.GENERIC_FOLLOW_RANGE,75).add(
                 EntityAttributes.GENERIC_MOVEMENT_SPEED, .3).add(
@@ -53,8 +62,24 @@ public class NetherGuy extends WitherSkeletonEntity {
 
     protected static ArrayList<WeakReference<NetherGuy>> netherGuys = new ArrayList<WeakReference<NetherGuy>>();
     protected static final int MAX_GUYS_AT_ONCE = 1;
+    private static final Random staticRandom = new Random();
 
 
+    public void setTeleportPos(BlockPos pos) {
+        dataTracker.set(TELEPORT_POS, pos);
+    }
+
+    public BlockPos getTeleportPos() {
+        return dataTracker.get(TELEPORT_POS);
+    }
+
+    public void setTeleportTimer(int timer) {
+        dataTracker.set(TELEPORT_TIMER, timer);
+    }
+
+    public int getTeleportTimer() {
+        return dataTracker.get(TELEPORT_TIMER);
+    }
 
     protected static int countNetherGuys() {
         netherGuys.removeIf((e) -> {
@@ -82,8 +107,8 @@ public class NetherGuy extends WitherSkeletonEntity {
 
 
     public static int findlocation(int pos){
-       int r = random.nextInt(16) + 16;
-        if (random.nextInt(2) == 0){
+       int r = staticRandom.nextInt(16) + 16;
+        if (staticRandom.nextInt(2) == 0){
             r = r*-1;
 
 
@@ -92,8 +117,8 @@ public class NetherGuy extends WitherSkeletonEntity {
     }
 
     public static int findlocationY(int pos){
-        int r = random.nextInt(10);
-        if (random.nextInt(2) == 0){
+        int r = staticRandom.nextInt(10);
+        if (staticRandom.nextInt(2) == 0){
             r = r*-1;
 
 
@@ -132,7 +157,43 @@ public class NetherGuy extends WitherSkeletonEntity {
         netherGuys.add(new WeakReference<NetherGuy>(guy));
     }
 
+    static {
+        TELEPORT_POS = DataTracker.registerData(NetherGuy.class, TrackedDataHandlerRegistry.BLOCK_POS);
+        TELEPORT_TIMER = DataTracker.registerData(NetherGuy.class, TrackedDataHandlerRegistry.INTEGER);
+    }
 
+    protected void initDataTracker() {
+        super.initDataTracker();
+        dataTracker.startTracking(TELEPORT_POS, new BlockPos(0,0,0));
+        dataTracker.startTracking(TELEPORT_TIMER, 100);
+    }
+
+    public void tick() {
+        super.tick();
+        if(world.isClient) {
+            checkTeleportParticles();
+        }
+    }
+
+
+    @Environment(EnvType.CLIENT)
+    protected void checkTeleportParticles() {
+        if(getTeleportTimer() < 50) {
+            produceTeleportParticles();
+        }
+    }
+
+    protected void produceTeleportParticles() {
+        ParticleEffect parameters = ParticleTypes.DRAGON_BREATH;
+        BlockPos pos = getTeleportPos();
+
+        for(int i = 0; i < 10; ++i) {
+            double d = random.nextGaussian() * 0.02D;
+            double e = random.nextGaussian() * 0.02D;
+            double f = random.nextGaussian() * 0.02D;
+            this.world.addParticle(parameters, pos.getX(), pos.getY(), pos.getZ(), d, e, f);
+        }
+    }
 
 
     public class PlayerPredicate implements Predicate<LivingEntity> {
@@ -151,7 +212,4 @@ public class NetherGuy extends WitherSkeletonEntity {
             return true;
         }
     }
-
-
-
 }

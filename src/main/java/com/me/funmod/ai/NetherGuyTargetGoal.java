@@ -4,6 +4,7 @@ import com.me.funmod.NetherGuy.NetherGuy;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -35,6 +36,8 @@ public class NetherGuyTargetGoal<T extends LivingEntity> extends FollowTargetGoa
     protected int distancecountdown;
     protected int navigatecountdown;
 
+
+
     protected void resettimers(){
         teleportTimer = 90;
         visibilitycountdown = 500;
@@ -48,6 +51,11 @@ public class NetherGuyTargetGoal<T extends LivingEntity> extends FollowTargetGoa
         resettimers();
 
     }
+
+    protected NetherGuy getNetherGuy() {
+        return (NetherGuy) this.mob;
+    }
+
     protected void teleporttick(){
         if(this.teleportTimer > 0) {
             this.teleportTimer --;
@@ -59,18 +67,20 @@ public class NetherGuyTargetGoal<T extends LivingEntity> extends FollowTargetGoa
     public void tick(){
         super.tick();
         teleportPos = targetEntity.getBlockPos();
-       if( !this.mob.getVisibilityCache().canSee(targetEntity)){
-           visibilitycountdown --;
-       }
-       if (visibilitycountdown <= 0) {
-        teleporttick();
-       }
-       if (this.mob.getNavigation().findPathTo(targetEntity, 256) == null){
-           navigatecountdown --;
-       }
-       if(navigatecountdown <=0){
-           teleporttick();
-       }
+        if (!this.mob.getVisibilityCache().canSee(targetEntity)) {
+            visibilitycountdown--;
+        }
+        if (visibilitycountdown <= 0) {
+            teleporttick();
+        }
+        if (this.mob.getNavigation().findPathTo(targetEntity, 256) == null) {
+            navigatecountdown--;
+        }
+        if (navigatecountdown <= 0) {
+            teleporttick();
+        }
+        getNetherGuy().setTeleportPos(teleportPos);
+        getNetherGuy().setTeleportTimer(teleportTimer);
     }
 
 }
