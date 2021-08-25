@@ -9,7 +9,7 @@ import net.minecraft.entity.projectile.SmallFireballEntity;
 import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -88,7 +88,7 @@ public class Spell {
         world.spawnEntity(spellProjectile);
     }
 
-    public static Spell fromTag(CompoundTag tag) {
+    public static Spell fromTag(NbtCompound tag) {
 
         Spell spell = new Spell(tag.getString("name"));
         spell.framesToLive = tag.getInt("framesToLive");
@@ -101,8 +101,8 @@ public class Spell {
     }
     public static final Spell EMPTY = new Spell("empty");
 
-    public CompoundTag toTag() {
-        CompoundTag tag = new CompoundTag();
+    public NbtCompound toTag() {
+        NbtCompound tag = new NbtCompound();
         tag.putString("name", this.name);
         tag.putInt("movementType", this.movementType.ordinal());
         tag.putInt("blockCollision", this.blockCollision.ordinal());

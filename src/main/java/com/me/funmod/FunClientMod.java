@@ -78,7 +78,7 @@ public class FunClientMod implements ClientModInitializer {
                 e.setPos(pos.x, pos.y, pos.z);
                 e.pitch = pitch;
                 e.yaw = yaw;
-                e.setEntityId(entityId);
+                e.setId(entityId);
                 e.setUuid(uuid);
                 MinecraftClient.getInstance().world.addEntity(entityId, e);
             });

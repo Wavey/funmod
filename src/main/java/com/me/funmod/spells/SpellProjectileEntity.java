@@ -5,7 +5,6 @@ import com.me.funmod.projectiles.EntitySpawnPacket;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.util.sat4j.core.Vec;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FlyingItemEntity;
@@ -18,7 +17,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -30,14 +29,15 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingItemEntity {
-    private static final TrackedData<CompoundTag> SPELL;
-    private static final TrackedData<CompoundTag> OTHERSPELLS;
+    private static final TrackedData<NbtCompound> SPELL;
+    private static final TrackedData<NbtCompound> OTHERSPELLS;
     private boolean amDead = false;
     private int aliveTimer = 0;
     private int blocksHit = 0;
@@ -214,11 +214,11 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
 
     @Environment(EnvType.CLIENT)
     public void produceParticlesAlongLine(ParticleEffect parameters, BlockPos posStart, BlockPos posEnd) {
-        Vector3f vStart = new Vector3f(posStart.getX(), posStart.getY(), posStart.getZ());
-        Vector3f vEnd = new Vector3f(posEnd.getX(), posEnd.getY(), posEnd.getZ());
-        Vector3f vDiff = vEnd.copy();
+        Vec3f vStart = new Vec3f(posStart.getX(), posStart.getY(), posStart.getZ());
+        Vec3f vEnd = new Vec3f(posEnd.getX(), posEnd.getY(), posEnd.getZ());
+        Vec3f vDiff = vEnd.copy();
         vDiff.subtract(vStart);
-        Vector3f pos;
+        Vec3f pos;
         for(int i = 0; i < 100; ++i) {
 
             pos = vDiff.copy(); pos.scale((float)this.random.nextGaussian());
@@ -234,28 +234,28 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
     protected void initDataTracker() {
         super.initDataTracker();
         this.getDataTracker().startTracking(SPELL, Spell.EMPTY.toTag());
-        this.getDataTracker().startTracking(OTHERSPELLS, new CompoundTag());
+        this.getDataTracker().startTracking(OTHERSPELLS, new NbtCompound());
     }
 
-    public void writeCustomDataToTag(CompoundTag tag) {
-        super.writeCustomDataToTag(tag);
+    public void writeCustomDataToNbt(NbtCompound tag) {
+        super.writeCustomDataToNbt(tag);
         tag.put("Spell", this.getRawSpell());
 
     }
 
-    public void readCustomDataFromTag(CompoundTag tag) {
-        super.readCustomDataFromTag(tag);
+    public void readCustomDataFromNbt(NbtCompound tag) {
+        super.readCustomDataFromNbt(tag);
         this.setRawSpell(tag.getCompound("Spell"));
     }
     public void setSpell(Spell spell) {
         this.getDataTracker().set(SPELL, spell.toTag());
     }
-    public void setRawSpell(CompoundTag spell) {
+    public void setRawSpell(NbtCompound spell) {
         this.getDataTracker().set(SPELL, spell);
     }
 
     void setOtherSpells(List<Spell> spells) {
-        CompoundTag tag = new CompoundTag();
+        NbtCompound tag = new NbtCompound();
         for(int i = 0;i < spells.size(); i++) {
             String key = String.format("OtherSpell%d",i);
             tag.put(key, spells.get(i).toTag());
@@ -264,7 +264,7 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
     }
 
     ArrayList<Spell> getOtherSpells() {
-        CompoundTag tag = this.getDataTracker().get(OTHERSPELLS);
+        NbtCompound tag = this.getDataTracker().get(OTHERSPELLS);
         ArrayList<Spell> spells = new ArrayList<Spell>();
         int i = 0;
         while(true) {
@@ -279,12 +279,12 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
         return spells;
     }
 
-    protected CompoundTag getRawSpell() {
+    protected NbtCompound getRawSpell() {
         return this.getDataTracker().get(SPELL);
     }
 
     protected Spell getSpell() {
-        return Spell.fromTag((CompoundTag)this.getDataTracker().get(SPELL));
+        return Spell.fromTag((NbtCompound)this.getDataTracker().get(SPELL));
     }
 
     static {

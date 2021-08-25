@@ -13,7 +13,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -36,7 +36,7 @@ public class DiamondZombie extends ZombieEntity {
             this.pos = pos;
             this.duration = duration;
         }
-        public CompoundTag toTag(CompoundTag tag) {
+        public NbtCompound toTag(NbtCompound tag) {
             tag.putString("effect", this.type.asString());
             tag.putInt("posx", this.pos.getX());
             tag.putInt("posy", this.pos.getY());
@@ -45,7 +45,7 @@ public class DiamondZombie extends ZombieEntity {
             return tag;
         }
 
-        public static Effect fromTag(CompoundTag tag) {
+        public static Effect fromTag(NbtCompound tag) {
 
             float duration = tag.getFloat("duration");
             BlockPos pos =  new BlockPos(
@@ -88,15 +88,15 @@ public class DiamondZombie extends ZombieEntity {
 
     }
 
-    public void writeCustomDataToTag(CompoundTag tag) {
-        super.writeCustomDataToTag(tag);
+    public void writeCustomDataToNbt(NbtCompound tag) {
+        super.writeCustomDataToNbt(tag);
         if(this.currentEffect != null) {
-            tag.put("current_effect", this.currentEffect.toTag(new CompoundTag()));
+            tag.put("current_effect", this.currentEffect.toTag(new NbtCompound()));
         }
     }
 
-   public void readCustomDataFromTag(CompoundTag tag) {
-        super.readCustomDataFromTag(tag);
+   public void readCustomDataFromNbt(NbtCompound tag) {
+        super.readCustomDataFromNbt(tag);
         if(tag.contains("current_effect")) {
             this.currentEffect = Effect.fromTag(tag.getCompound("current_effect"));
         }

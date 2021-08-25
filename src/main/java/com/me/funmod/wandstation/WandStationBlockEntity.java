@@ -8,7 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
@@ -28,14 +28,14 @@ public class WandStationBlockEntity extends BlockEntity implements ImplementedIn
         return items;
     }
 
-    public void fromTag(BlockState state, CompoundTag tag) {
-        super.fromTag(state, tag);
-        Inventories.fromTag(tag, items);
+    public void readNbt(BlockState state, NbtCompound tag) {
+        super.readNbt(state, tag);
+        Inventories.readNbt(tag, items);
     }
 
-    public CompoundTag toTag(CompoundTag tag) {
-        Inventories.toTag(tag, items);
-        return super.toTag(tag);
+    public NbtCompound writeNbt(NbtCompound tag) {
+        Inventories.writeNbt(tag, items);
+        return super.writeNbt(tag);
     }
 
     @Override

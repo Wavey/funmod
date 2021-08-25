@@ -12,7 +12,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Hand;
@@ -84,18 +84,18 @@ public class WandItem extends Item {
 
     }
     public static DefaultedList<ItemStack> getOrCreateInventory(ItemStack wandStack, boolean createIfNeeded) {
-        CompoundTag inventoryTag = getOrCreateInventoryTag((wandStack), createIfNeeded);
+        NbtCompound inventoryTag = getOrCreateInventoryTag((wandStack), createIfNeeded);
         if(inventoryTag.isEmpty()) {
             return DefaultedList.ofSize(0, ItemStack.EMPTY);
         }
         int size = inventoryTag.getInt("size");
         DefaultedList<ItemStack> items = DefaultedList.ofSize(size, ItemStack.EMPTY);
-        Inventories.fromTag(inventoryTag.getCompound("items"), items);
+        Inventories.readNbt(inventoryTag.getCompound("items"), items);
         return items;
     }
 
-    public static CompoundTag getOrCreateInventoryTag(ItemStack wandStack, boolean createIfNeeded) {
-        CompoundTag tag = wandStack.getOrCreateSubTag("Inventory");
+    public static NbtCompound getOrCreateInventoryTag(ItemStack wandStack, boolean createIfNeeded) {
+        NbtCompound tag = wandStack.getOrCreateSubNbt("Inventory");
         if(tag.isEmpty() && createIfNeeded) {
             DefaultedList<ItemStack> items = DefaultedList.ofSize(random.nextInt(2) + 3, ItemStack.EMPTY );
             for(int i = 0;i < items.size(); ++i) {
@@ -103,8 +103,8 @@ public class WandItem extends Item {
                 ItemStack spellItemStack = new ItemStack(spellItem);
                 items.set(i, spellItemStack);
             }
-            CompoundTag inventoryTag = new CompoundTag();
-            Inventories.toTag(inventoryTag, items, true);
+            NbtCompound inventoryTag = new NbtCompound();
+            Inventories.writeNbt(inventoryTag, items, true);
             tag.put("items", inventoryTag);
             tag.putInt("size", items.size());
         }

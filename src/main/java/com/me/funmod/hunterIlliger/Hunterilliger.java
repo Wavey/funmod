@@ -1,6 +1,5 @@
 package com.me.funmod.hunterIlliger;
 
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -14,10 +13,11 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.village.raid.Raid;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -37,7 +37,7 @@ public class Hunterilliger extends PillagerEntity {
         double e = target.getZ() - entity.getZ();
         double f = (double) MathHelper.sqrt(d * d + e * e);
         double g = target.getBodyY(0.3333333333333333D) - projectile.getY() + f * 0.20000000298023224D;
-        Vector3f vector3f = this.getProjectileLaunchVelocity(entity, new Vec3d(d, g, e), multishotSpray);
+        Vec3f vector3f = this.getProjectileLaunchVelocity(entity, new Vec3d(d, g, e), multishotSpray);
         projectile.setVelocity((double)vector3f.getX(), (double)vector3f.getY(), (double)vector3f.getZ(), speed, (float)(14 - entity.world.getDifficulty().getId() * 4));
         entity.playSound(SoundEvents.ITEM_CROSSBOW_SHOOT, 1.0F, 1.0F / (entity.getRandom().nextFloat() * 0.4F + 0.8F));
     }
@@ -53,7 +53,7 @@ public class Hunterilliger extends PillagerEntity {
         return false;
     }
 
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityTag) {
 
 
         return super.initialize(world, difficulty, spawnReason, entityData, entityTag);

@@ -137,7 +137,7 @@ public class NetherGuy extends WitherSkeletonEntity {
             BlockPos pos2 = new BlockPos(x,y,z);
             if( (SpawnHelper.canSpawn(SpawnRestriction.Location.ON_GROUND, player.world, pos2, EntityType.WITHER_SKELETON))){
                 NetherGuy guy = FunMod.NETHERGUY.create(player.world);
-                guy.updatePosition(pos2.getX(), pos2.getY(), pos2.getZ());
+                guy.setPosition(pos2.getX(), pos2.getY(), pos2.getZ());
 
                 player.world.spawnEntity(guy);
                 System.out.println("Spawning new Nether guy");

@@ -11,7 +11,6 @@ import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.util.collection.DefaultedList;
 

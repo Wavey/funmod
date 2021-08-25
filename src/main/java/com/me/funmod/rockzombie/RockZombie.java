@@ -7,7 +7,7 @@ import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -25,7 +25,7 @@ public class RockZombie extends ZombieEntity {
 
     public static void convertToRockZombie(ZombieEntity entity) {
         if(!(entity instanceof RockZombie)) {
-            ZombieEntity zombieEntity = (ZombieEntity)entity.method_29243(FunMod.ROCKZOMBIE, true);
+            ZombieEntity zombieEntity = (ZombieEntity)entity.convertTo(FunMod.ROCKZOMBIE, true);
         }
 
     }
@@ -40,7 +40,7 @@ public class RockZombie extends ZombieEntity {
         }
     }
     @Nullable
-    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityTag) {
         super.initialize(world,difficulty,spawnReason,entityData,entityTag);
         this.setCanPickUpLoot(true);
         return entityData;
