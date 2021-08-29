@@ -30,14 +30,14 @@ public class FunClientMod implements ClientModInitializer {
     public static final Identifier PacketID = new Identifier(FunMod.ModID, "spawn_packet");
     @Override
     public void onInitializeClient() {
-        EntityRendererRegistry.INSTANCE.register(FunMod.NEWZOMBIE, (dispatcher, context) -> {
-            return new NewZombieEntityRenderer(dispatcher);
+        EntityRendererRegistry.INSTANCE.register(FunMod.NEWZOMBIE, (context) -> {
+            return new NewZombieEntityRenderer(context);
         });
-        EntityRendererRegistry.INSTANCE.register(FunMod.ROCKZOMBIE, (dispatcher, context) -> {
-            return new RockZombieRenderer(dispatcher);
+        EntityRendererRegistry.INSTANCE.register(FunMod.ROCKZOMBIE, ( context) -> {
+            return new RockZombieRenderer(context);
         });
-        EntityRendererRegistry.INSTANCE.register(FunMod.DIAMONDZOMBIE, (dispatcher, context) -> {
-            return new DiamondZombieRenderer(dispatcher);
+        EntityRendererRegistry.INSTANCE.register(FunMod.DIAMONDZOMBIE, (context) -> {
+            return new DiamondZombieRenderer(context);
         });
         EntityRendererRegistry.INSTANCE.register(FunMod.SPELLPROJECTILEENTITY, (dispatcher, context) -> {
             return new SpellProjectileEntityRenderer(dispatcher, context.getItemRenderer());

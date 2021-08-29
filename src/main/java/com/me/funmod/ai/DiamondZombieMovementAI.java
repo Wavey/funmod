@@ -58,7 +58,7 @@ public class DiamondZombieMovementAI extends ZombieAttackGoal {
               metashoottimer--;
               this.mob.lookAtEntity(nearestPlayer,360,360);
               ZombieProjectile spellProjectile = new ZombieProjectile(this.mob.world, this.diamondZombie);
-              spellProjectile.setProperties(this.diamondZombie, this.diamondZombie.pitch, this.diamondZombie.yaw, 0.0F, 1.5F, 1.0F);
+              spellProjectile.setProperties(this.diamondZombie, this.diamondZombie.getPitch(), this.diamondZombie.getYaw(), 0.0F, 1.5F, 1.0F);
               spellProjectile.setNoGravity(true);
               this.mob.playSound(SoundEvents.ENTITY_BLAZE_SHOOT,1,1);
               this.diamondZombie.world.spawnEntity(spellProjectile);
