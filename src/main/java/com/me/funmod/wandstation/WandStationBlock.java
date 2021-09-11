@@ -23,15 +23,15 @@ public class WandStationBlock extends Block implements BlockEntityProvider {
    }
 
    @Override
-   public BlockEntity createBlockEntity(BlockView block) {
-       return new WandStationBlockEntity();
+   public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+       return new WandStationBlockEntity(pos, state);
    }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         // You need a Block.createScreenHandlerFactory implementation that delegates to the block entity,
         // such as the one from BlockWithEntity
-        ItemStack currentInHand = player.inventory.getMainHandStack();
+        ItemStack currentInHand = player.getInventory().getMainHandStack();
         if (currentInHand.getItem() == FunMod.WAND) {
             System.out.println("in block use for WandStationBlock");
             player.openHandledScreen(state.createScreenHandlerFactory(world, pos));

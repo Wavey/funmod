@@ -35,7 +35,7 @@ public class Hunterilliger extends PillagerEntity {
 
         double d = target.getX() - entity.getX();
         double e = target.getZ() - entity.getZ();
-        double f = (double) MathHelper.sqrt(d * d + e * e);
+        double f = Math.sqrt(d * d + e * e);
         double g = target.getBodyY(0.3333333333333333D) - projectile.getY() + f * 0.20000000298023224D;
         Vec3f vector3f = this.getProjectileLaunchVelocity(entity, new Vec3d(d, g, e), multishotSpray);
         projectile.setVelocity((double)vector3f.getX(), (double)vector3f.getY(), (double)vector3f.getZ(), speed, (float)(14 - entity.world.getDifficulty().getId() * 4));

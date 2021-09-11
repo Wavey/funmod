@@ -2,13 +2,19 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.me.funmod.mixins",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_16",
+  "old_mixins": [
+
+  ],
   "mixins": [
     "BiomeFeaturesMixin",
     "PlayerEntityMixin",
     "ZombieEntityMixin",
     "SkeletonEntityMixin",
     "CowMixin"
+  ],
+  "old_client": [
+
   ],
   "client": [
     "TestMixin",

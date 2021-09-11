@@ -16,6 +16,7 @@ import com.me.funmod.zombie.NewZombieEntity;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
@@ -114,7 +115,7 @@ public class FunMod implements ModInitializer {
 
         Registry.register(Registry.BLOCK, new Identifier("funmod", "wandstation_block"), WANDSTATION_BLOCK);
         Registry.register(Registry.ITEM, new Identifier("funmod", "wandstation_block"), new BlockItem(WANDSTATION_BLOCK, new FabricItemSettings().group(ItemGroup.MISC)));
-        WANDSTATION_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "funmod:wandstation", BlockEntityType.Builder.create(WandStationBlockEntity::new, WANDSTATION_BLOCK).build(null));
+        WANDSTATION_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "funmod:wandstation", FabricBlockEntityTypeBuilder.create(WandStationBlockEntity::new, WANDSTATION_BLOCK).build(null));
         SCREEN_HANDLER_TYPE = ScreenHandlerRegistry.registerSimple(new Identifier("funmod", "wandstation_block"),
                 (syncId, inventory) -> new WandStationGuiDescription(syncId, inventory, ScreenHandlerContext.EMPTY));
         FabricDefaultAttributeRegistry.register(NEWZOMBIE, NewZombieEntity.createZombieAttributes());

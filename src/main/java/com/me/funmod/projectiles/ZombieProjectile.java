@@ -36,7 +36,7 @@ public class ZombieProjectile  extends ThrownItemEntity implements FlyingItemEnt
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
         if (!this.world.isClient) {
-            this.remove();
+            this.remove(RemovalReason.KILLED);
         }
     }
 

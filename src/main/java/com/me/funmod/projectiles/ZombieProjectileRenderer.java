@@ -9,6 +9,7 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.texture.SpriteAtlasTexture;
@@ -27,15 +28,15 @@ public class ZombieProjectileRenderer extends EntityRenderer<ZombieProjectile> {
     private final float scale;
     private final boolean lit;
 
-    public ZombieProjectileRenderer(EntityRenderDispatcher dispatcher, ItemRenderer itemRenderer, float scale, boolean lit) {
-        super(dispatcher);
+    public ZombieProjectileRenderer(EntityRendererFactory.Context context, ItemRenderer itemRenderer, float scale, boolean lit) {
+        super(context);
         this.itemRenderer = itemRenderer;
         this.scale = scale;
         this.lit = lit;
     }
 
-    public ZombieProjectileRenderer(EntityRenderDispatcher dispatcher, ItemRenderer itemRenderer) {
-        this(dispatcher, itemRenderer, 1.0F, false);
+    public ZombieProjectileRenderer(EntityRendererFactory.Context context, ItemRenderer itemRenderer) {
+        this(context, itemRenderer, 1.0F, false);
     }
 
     protected int getBlockLight(ZombieProjectile entity, BlockPos blockPos) {
@@ -48,7 +49,7 @@ public class ZombieProjectileRenderer extends EntityRenderer<ZombieProjectile> {
             matrices.scale(this.scale, this.scale, this.scale);
             matrices.multiply(this.dispatcher.getRotation());
             matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
-            this.itemRenderer.renderItem(entity.getStack(), ModelTransformation.Mode.GROUND, light, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers);
+            this.itemRenderer.renderItem(entity.getStack(), ModelTransformation.Mode.GROUND, light, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, 0);
             matrices.pop();
             super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
         }

@@ -20,8 +20,6 @@ abstract class HungerManagerMixin {
     @Shadow
     private float exhaustion;
     @Shadow
-    private int foodStarvationTimer;
-    @Shadow
     private int prevFoodLevel;
 
 
@@ -29,6 +27,7 @@ abstract class HungerManagerMixin {
     public void addExhaustion(float exhaustion) { }
 
 
+    /*
     @Inject(at = @At("HEAD"), method = "update(Lnet/minecraft/entity/player/PlayerEntity;)V", cancellable = true)
     private void onUpdate(PlayerEntity player, CallbackInfo info) {
         Difficulty difficulty = player.world.getDifficulty();
@@ -77,5 +76,5 @@ abstract class HungerManagerMixin {
         }
         info.cancel();
     }
-
+    */
 }

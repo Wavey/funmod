@@ -87,7 +87,7 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
 
     protected void die() {
         this.spawnNextSpell();
-        this.remove();
+        this.remove(RemovalReason.KILLED);
         Spell spell = this.getSpell();
         System.out.println("Spell " + spell.getName() + " just died");
     }

@@ -10,6 +10,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.function.Function;
 
+/*
 public class SpellProjectileEntityModel extends Model {
     public ModelPart sphere;
     private final float scale;
@@ -31,3 +32,4 @@ public class SpellProjectileEntityModel extends Model {
         matrices.pop();
     }
 }
+*/

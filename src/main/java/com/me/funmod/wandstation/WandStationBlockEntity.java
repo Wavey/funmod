@@ -16,11 +16,12 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.BlockPos;
 
 public class WandStationBlockEntity extends BlockEntity implements ImplementedInventory, NamedScreenHandlerFactory {
     private final DefaultedList<ItemStack> items = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    public WandStationBlockEntity() {
-        super(FunMod.WANDSTATION_BLOCK_ENTITY);
+    public WandStationBlockEntity(BlockPos pos, BlockState state) {
+        super(FunMod.WANDSTATION_BLOCK_ENTITY, pos, state);
     }
 
     @Override
@@ -28,8 +29,8 @@ public class WandStationBlockEntity extends BlockEntity implements ImplementedIn
         return items;
     }
 
-    public void readNbt(BlockState state, NbtCompound tag) {
-        super.readNbt(state, tag);
+    public void readNbt(NbtCompound tag) {
+        super.readNbt(tag);
         Inventories.readNbt(tag, items);
     }
 

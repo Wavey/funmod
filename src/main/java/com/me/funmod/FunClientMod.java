@@ -39,19 +39,19 @@ public class FunClientMod implements ClientModInitializer {
         EntityRendererRegistry.INSTANCE.register(FunMod.DIAMONDZOMBIE, (context) -> {
             return new DiamondZombieRenderer(context);
         });
-        EntityRendererRegistry.INSTANCE.register(FunMod.SPELLPROJECTILEENTITY, (dispatcher, context) -> {
-            return new SpellProjectileEntityRenderer(dispatcher, context.getItemRenderer());
+        EntityRendererRegistry.INSTANCE.register(FunMod.SPELLPROJECTILEENTITY, ( context) -> {
+            return new SpellProjectileEntityRenderer(context, context.getItemRenderer());
             //return new FlyingItemEntityRenderer<SpellProjectileEntity>(dispatcher, context.getItemRenderer());
         });
-        EntityRendererRegistry.INSTANCE.register(FunMod.ZOMBIEPROJECTILE, (dispatcher, context) -> {
-            return new ZombieProjectileRenderer(dispatcher, context.getItemRenderer());
+        EntityRendererRegistry.INSTANCE.register(FunMod.ZOMBIEPROJECTILE, (context) -> {
+            return new ZombieProjectileRenderer( context, context.getItemRenderer());
             //return new FlyingItemEntityRenderer<SpellProjectileEntity>(dispatcher, context.getItemRenderer());
         });
-        EntityRendererRegistry.INSTANCE.register(FunMod.HUNTERILLIGER, (dispatcher, context) -> {
-            return new HunterilligerRenderer(dispatcher);
+        EntityRendererRegistry.INSTANCE.register(FunMod.HUNTERILLIGER, (context) -> {
+            return new HunterilligerRenderer(context);
         });
-        EntityRendererRegistry.INSTANCE.register(FunMod.NETHERGUY, (dispatcher, context) -> {
-            return new NetherGuyRenderer(dispatcher);
+        EntityRendererRegistry.INSTANCE.register(FunMod.NETHERGUY, (context) -> {
+            return new NetherGuyRenderer(context);
         });
 
         ScreenRegistry.<WandStationGuiDescription, WandStationBlockScreen>register(FunMod.SCREEN_HANDLER_TYPE,
@@ -76,8 +76,8 @@ public class FunClientMod implements ClientModInitializer {
                     throw new IllegalStateException("Failed to create instance of entity \"" + Registry.ENTITY_TYPE.getId(et) + "\"!");
                 e.updateTrackedPosition(pos);
                 e.setPos(pos.x, pos.y, pos.z);
-                e.pitch = pitch;
-                e.yaw = yaw;
+                e.setPitch(pitch);
+                e.setYaw(yaw);
                 e.setId(entityId);
                 e.setUuid(uuid);
                 MinecraftClient.getInstance().world.addEntity(entityId, e);
