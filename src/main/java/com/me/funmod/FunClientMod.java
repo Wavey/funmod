@@ -13,7 +13,7 @@ import com.me.funmod.zombie.NewZombieEntityRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
@@ -30,27 +30,27 @@ public class FunClientMod implements ClientModInitializer {
     public static final Identifier PacketID = new Identifier(FunMod.ModID, "spawn_packet");
     @Override
     public void onInitializeClient() {
-        EntityRendererRegistry.INSTANCE.register(FunMod.NEWZOMBIE, (context) -> {
+        EntityRendererRegistry.register(FunMod.NEWZOMBIE, (context) -> {
             return new NewZombieEntityRenderer(context);
         });
-        EntityRendererRegistry.INSTANCE.register(FunMod.ROCKZOMBIE, ( context) -> {
+        EntityRendererRegistry.register(FunMod.ROCKZOMBIE, ( context) -> {
             return new RockZombieRenderer(context);
         });
-        EntityRendererRegistry.INSTANCE.register(FunMod.DIAMONDZOMBIE, (context) -> {
+        EntityRendererRegistry.register(FunMod.DIAMONDZOMBIE, (context) -> {
             return new DiamondZombieRenderer(context);
         });
-        EntityRendererRegistry.INSTANCE.register(FunMod.SPELLPROJECTILEENTITY, ( context) -> {
+        EntityRendererRegistry.register(FunMod.SPELLPROJECTILEENTITY, ( context) -> {
             return new SpellProjectileEntityRenderer(context, context.getItemRenderer());
             //return new FlyingItemEntityRenderer<SpellProjectileEntity>(dispatcher, context.getItemRenderer());
         });
-        EntityRendererRegistry.INSTANCE.register(FunMod.ZOMBIEPROJECTILE, (context) -> {
+        EntityRendererRegistry.register(FunMod.ZOMBIEPROJECTILE, (context) -> {
             return new ZombieProjectileRenderer( context, context.getItemRenderer());
             //return new FlyingItemEntityRenderer<SpellProjectileEntity>(dispatcher, context.getItemRenderer());
         });
-        EntityRendererRegistry.INSTANCE.register(FunMod.HUNTERILLIGER, (context) -> {
+        EntityRendererRegistry.register(FunMod.HUNTERILLIGER, (context) -> {
             return new HunterilligerRenderer(context);
         });
-        EntityRendererRegistry.INSTANCE.register(FunMod.NETHERGUY, (context) -> {
+        EntityRendererRegistry.register(FunMod.NETHERGUY, (context) -> {
             return new NetherGuyRenderer(context);
         });
 
