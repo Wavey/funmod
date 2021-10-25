@@ -11,7 +11,8 @@
     "PlayerEntityMixin",
     "ZombieEntityMixin",
     "SkeletonEntityMixin",
-    "CowMixin"
+    "CowMixin",
+    "AnimalEntityMixin"
   ],
   "old_client": [
 
