@@ -60,9 +60,7 @@ public class Hunterilliger extends PillagerEntity {
     }
     protected void initGoals() {
         super.initGoals();
-        this.targetSelector.add(3, new FollowTargetGoal(this, CowEntity.class, true));
-        this.targetSelector.add(3, new FollowTargetGoal(this, PigEntity.class, true));
-        this.targetSelector.add(3, new FollowTargetGoal(this, SheepEntity.class, true));
+
 
     }
 

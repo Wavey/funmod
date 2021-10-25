@@ -3,6 +3,7 @@ package com.me.funmod;
 import com.me.funmod.NetherGuy.NetherGuy;
 import com.me.funmod.diamondzombie.DiamondZombie;
 import com.me.funmod.hunterIlliger.Hunterilliger;
+import com.me.funmod.mimic.Mimic;
 import com.me.funmod.projectiles.ZombieProjectile;
 import com.me.funmod.rockzombie.RockZombie;
 import com.me.funmod.spells.SpellFactory;
@@ -93,6 +94,14 @@ public class FunMod implements ModInitializer {
             EntityDimensions.fixed(1.0f, 2.0f)).build()
 
     );
+    public  static final EntityType<Mimic> MIMIC = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier("funmod", "mimic"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, Mimic::new).dimensions(
+                    EntityDimensions.fixed(1.0f, 2.0f)).build()
+
+    );
+
 
 //    public static final EntityType<ZombieProjectile> ZOMBIEPROJECTILE = Registry.register(
 //            Registry.ENTITY_TYPE,
@@ -123,6 +132,7 @@ public class FunMod implements ModInitializer {
         FabricDefaultAttributeRegistry.register(HUNTERILLIGER, Hunterilliger.createHostileAttributes());
         FabricDefaultAttributeRegistry.register(DIAMONDZOMBIE, DiamondZombie.createZombieAttributes());
         FabricDefaultAttributeRegistry.register(NETHERGUY, NetherGuy.createNetherGuyAttributes());
+        FabricDefaultAttributeRegistry.register(MIMIC, Mimic.createHostileAttributes());
 
         SpellFactory.initSpells();
 

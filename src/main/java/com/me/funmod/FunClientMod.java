@@ -3,6 +3,7 @@ package com.me.funmod;
 import com.me.funmod.NetherGuy.NetherGuyRenderer;
 import com.me.funmod.diamondzombie.DiamondZombieRenderer;
 import com.me.funmod.hunterIlliger.HunterilligerRenderer;
+import com.me.funmod.mimic.MimicRenderer;
 import com.me.funmod.projectiles.EntitySpawnPacket;
 import com.me.funmod.projectiles.ZombieProjectileRenderer;
 import com.me.funmod.rockzombie.RockZombieRenderer;
@@ -52,6 +53,9 @@ public class FunClientMod implements ClientModInitializer {
         });
         EntityRendererRegistry.register(FunMod.NETHERGUY, (context) -> {
             return new NetherGuyRenderer(context);
+        });
+        EntityRendererRegistry.register(FunMod.MIMIC, (context) -> {
+            return new MimicRenderer(context);
         });
 
         ScreenRegistry.<WandStationGuiDescription, WandStationBlockScreen>register(FunMod.SCREEN_HANDLER_TYPE,

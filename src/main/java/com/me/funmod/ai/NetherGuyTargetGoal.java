@@ -47,6 +47,7 @@ public class NetherGuyTargetGoal<T extends LivingEntity> extends FollowTargetGoa
     protected void teleport(){
         System.out.println("teleporting");
         this.mob.teleport(this.teleportPos.getX(), this.teleportPos.getY(), this.teleportPos.getZ());
+        this.mob.setPosition(this.teleportPos.getX(),this.teleportPos.getY(), this.teleportPos.getZ());
         this.mob.playSound(SoundEvents.ENTITY_SHULKER_TELEPORT,2,1);
         resettimers();
 
