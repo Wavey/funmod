@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98986242-9ffc-4b85-a580-61e526785503" name="Default Changelist" comment="Initial version with newzombie and Healthy Soup">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/mimic/Mimic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/mimic/MimicModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/mimic/MimicRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/funmod/textures/entity/testmimic.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunClientMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunClientMod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/FunMod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/ai/NetherGuyTargetGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/ai/NetherGuyTargetGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/hunterIlliger/Hunterilliger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/hunterIlliger/Hunterilliger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/AnimalEntityMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/AnimalEntityMixin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/CowMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/CowMixin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
