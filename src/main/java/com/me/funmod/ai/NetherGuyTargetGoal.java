@@ -28,13 +28,14 @@ public class NetherGuyTargetGoal<T extends LivingEntity> extends FollowTargetGoa
 
     public NetherGuyTargetGoal(MobEntity mob, Class<T> targetClass, int reciprocalChance, boolean checkVisibility, boolean checkCanNavigate, @Nullable Predicate<LivingEntity> targetPredicate) {
         super(mob, targetClass, reciprocalChance, checkVisibility, checkCanNavigate, targetPredicate);
+        resettimers();
     }
     //protected NetherGuy mob;
     protected BlockPos teleportPos;
     protected int teleportTimer =90;
-    protected int visibilitycountdown;
-    protected int distancecountdown;
-    protected int navigatecountdown;
+    protected int visibilitycountdown = 500;
+    protected int distancecountdown = 100;
+    protected int navigatecountdown = 100;
 
 
 
@@ -46,8 +47,7 @@ public class NetherGuyTargetGoal<T extends LivingEntity> extends FollowTargetGoa
     }
     protected void teleport(){
         System.out.println("teleporting");
-        this.mob.teleport(this.teleportPos.getX(), this.teleportPos.getY(), this.teleportPos.getZ());
-        this.mob.setPosition(this.teleportPos.getX(),this.teleportPos.getY(), this.teleportPos.getZ());
+        ((NetherGuy)this.mob).doTeleport(teleportPos);
         this.mob.playSound(SoundEvents.ENTITY_SHULKER_TELEPORT,2,1);
         resettimers();
 
@@ -70,6 +70,8 @@ public class NetherGuyTargetGoal<T extends LivingEntity> extends FollowTargetGoa
         teleportPos = targetEntity.getBlockPos();
         if (!this.mob.getVisibilityCache().canSee(targetEntity)) {
             visibilitycountdown--;
+        }else{
+            visibilitycountdown ++;
         }
         if (visibilitycountdown <= 0) {
             teleporttick();

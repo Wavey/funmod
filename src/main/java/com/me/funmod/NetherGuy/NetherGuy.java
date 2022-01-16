@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
@@ -51,13 +52,34 @@ public class NetherGuy extends WitherSkeletonEntity {
 
 
     }
+    public void doTeleport(BlockPos pos ){
+        teleport(pos.getX(), pos.getY(), pos.getZ());
+        setPosition(pos.getX(),pos.getY(), pos.getZ());
+        removeTargetGoal();
+    }
     @Override
     protected void initGoals() {
+        checkTargetGoal();
+        goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+    }
 
-        this.goalSelector.add(2,
-                new NetherGuyTargetGoal<PlayerEntity>(this, PlayerEntity.class,10,
-                                        false,false, new PlayerPredicate()));
+    protected NetherGuyTargetGoal<PlayerEntity> targetGoal = null;
+    protected boolean shouldRemoveGoal = false;
 
+    protected void removeTargetGoal() {
+        shouldRemoveGoal = true;
+    }
+    protected void checkTargetGoal() {
+        if (shouldRemoveGoal && targetGoal != null) {
+            goalSelector.remove(targetGoal);
+            targetGoal = null;
+            shouldRemoveGoal = false;
+        }
+        if (targetGoal == null) {
+            targetGoal = new NetherGuyTargetGoal<PlayerEntity>(this, PlayerEntity.class,10,
+                    false,false, new PlayerPredicate());
+            this.goalSelector.add(2, targetGoal);
+        }
     }
 
     protected static ArrayList<WeakReference<NetherGuy>> netherGuys = new ArrayList<WeakReference<NetherGuy>>();
@@ -170,6 +192,8 @@ public class NetherGuy extends WitherSkeletonEntity {
 
     public void tick() {
         super.tick();
+        checkTargetGoal();
+
         if(world.isClient) {
             checkTeleportParticles();
         }
