@@ -16,6 +16,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -34,8 +35,8 @@ public abstract class AnimalEntityMixin extends PassiveEntity {
 
     protected AnimalEntityMixin(EntityType<? extends PassiveEntity> entityType, World world) {
         super(entityType, world);
-        this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, 16.0F);
-        this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, -1.0F);
+        setPathfindingPenalty(PathNodeType.DANGER_FIRE, 16.0F);
+        setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, -1.0F);
     }
 
     static {
@@ -47,43 +48,54 @@ public abstract class AnimalEntityMixin extends PassiveEntity {
 
         AnimalEntity This = (AnimalEntity)(Object) this;
         boolean canbeMimic = This instanceof CowEntity || This instanceof SheepEntity || This instanceof PigEntity;
-        boolean m = random.nextInt(5) == 1 && !this.isBaby() && canbeMimic;
+        boolean m = random.nextInt(5) == 1 && !isBaby() && canbeMimic;
 
-        this.dataTracker.startTracking(MIMIC,m );
+
+        dataTracker.startTracking(MIMIC,m );
+    }
+    public void writeCustomDataToNbt(NbtCompound tag) {
+        super.writeCustomDataToNbt(tag);
+        tag.putBoolean("mimic", dataTracker.get(MIMIC));
+
+    }
+
+    public void readCustomDataFromNbt(NbtCompound tag) {
+        super.readCustomDataFromNbt(tag);
+        dataTracker.set(MIMIC, tag.getBoolean("mimic"));
     }
 
     @Inject(at = @At("HEAD"), method = "mobTick()V", cancellable = true)
     private void onMobTick( CallbackInfo info) {
         AnimalEntity This = (AnimalEntity)(Object) this;
-        if (this.dataTracker.get(this.MIMIC) == true && (this.getAttacker() instanceof PlayerEntity)){
-            this.convertTo(FunMod.MIMIC,false);
+        if (dataTracker.get(MIMIC) == true && (getAttacker() instanceof PlayerEntity)){
+            convertTo(FunMod.MIMIC,false);
         }
-        if (This instanceof CowEntity && this.dataTracker.get(this.MIMIC) == true){
-            this.goalSelector.clear();
-            this.goalSelector.add(0, new SwimGoal(this));
-            this.goalSelector.add(1, new EscapeDangerGoal(this, 2.0D));
-            this.goalSelector.add(3, new TemptGoal(this, 1.25D, Ingredient.ofItems(new ItemConvertible[]{Items.WHEAT}), false));
-            this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
-            this.goalSelector.add(7, new LookAroundGoal(this));
-            this.ambientSoundChance = 0;
+        if (This instanceof CowEntity && dataTracker.get(MIMIC)){
+            goalSelector.clear();
+            goalSelector.add(0, new SwimGoal(this));
+            goalSelector.add(1, new EscapeDangerGoal(this, 2.0D));
+            goalSelector.add(3, new TemptGoal(this, 1.25D, Ingredient.ofItems(new ItemConvertible[]{Items.WHEAT}), false));
+            goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
+            goalSelector.add(7, new LookAroundGoal(this));
+            ambientSoundChance = 0;
         }
-        if (This instanceof SheepEntity && this.dataTracker.get(this.MIMIC) == true){
-            this.goalSelector.clear();
-            this.goalSelector.add(0, new SwimGoal(this));
-            this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25D));
-            this.goalSelector.add(3, new TemptGoal(this, 1.1D, Ingredient.ofItems(new ItemConvertible[]{Items.WHEAT}), false));
-            this.goalSelector.add(6, new WanderAroundFarGoal(this, 1.0D));
-            this.goalSelector.add(8, new LookAroundGoal(this));
-            this.ambientSoundChance = 0;
+        if (This instanceof SheepEntity && dataTracker.get(MIMIC)){
+            goalSelector.clear();
+            goalSelector.add(0, new SwimGoal(this));
+            goalSelector.add(1, new EscapeDangerGoal(this, 1.25D));
+            goalSelector.add(3, new TemptGoal(this, 1.1D, Ingredient.ofItems(new ItemConvertible[]{Items.WHEAT}), false));
+            goalSelector.add(6, new WanderAroundFarGoal(this, 1.0D));
+            goalSelector.add(8, new LookAroundGoal(this));
+            ambientSoundChance = 0;
         }
-        if (This instanceof PigEntity && this.dataTracker.get(this.MIMIC) == true){
-            this.goalSelector.clear();
-            this.goalSelector.add(0, new SwimGoal(this));
-            this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25D));
-            this.goalSelector.add(4, new TemptGoal(this, 1.2D, Ingredient.ofItems(new ItemConvertible[]{Items.CARROT_ON_A_STICK}), false));
-            this.goalSelector.add(6, new WanderAroundFarGoal(this, 1.0D));
-            this.goalSelector.add(8, new LookAroundGoal(this));
-            this.ambientSoundChance = 0;
+        if (This instanceof PigEntity && dataTracker.get(MIMIC)){
+            goalSelector.clear();
+            goalSelector.add(0, new SwimGoal(this));
+            goalSelector.add(1, new EscapeDangerGoal(this, 1.25D));
+            goalSelector.add(4, new TemptGoal(this, 1.2D, Ingredient.ofItems(new ItemConvertible[]{Items.CARROT_ON_A_STICK}), false));
+            goalSelector.add(6, new WanderAroundFarGoal(this, 1.0D));
+            goalSelector.add(8, new LookAroundGoal(this));
+            ambientSoundChance = 0;
         }
     }
 
@@ -105,18 +117,18 @@ public abstract class AnimalEntityMixin extends PassiveEntity {
                 animalEntity.setPersistent();
             }
 
-            animalEntity.setInvulnerable(this.isInvulnerable());
+            animalEntity.setInvulnerable(isInvulnerable());
             if (keepEquipment) {
-                animalEntity.setCanPickUpLoot(this.canPickUpLoot());
+                animalEntity.setCanPickUpLoot(canPickUpLoot());
                 EquipmentSlot[] var4 = EquipmentSlot.values();
                 int var5 = var4.length;
 
                 for(int var6 = 0; var6 < var5; ++var6) {
                     EquipmentSlot equipmentSlot = var4[var6];
-                    ItemStack itemStack = this.getEquippedStack(equipmentSlot);
+                    ItemStack itemStack = getEquippedStack(equipmentSlot);
                     if (!itemStack.isEmpty()) {
                         animalEntity.equipStack(equipmentSlot, itemStack.copy());
-                        animalEntity.setEquipmentDropChance(equipmentSlot, this.getDropChance(equipmentSlot));
+                        animalEntity.setEquipmentDropChance(equipmentSlot, getDropChance(equipmentSlot));
                         itemStack.setCount(0);
                     }
                 }
