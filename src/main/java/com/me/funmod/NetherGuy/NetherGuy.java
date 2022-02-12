@@ -7,11 +7,11 @@ import com.me.funmod.mixins.PlayerEntityMixin;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.SkyProperties;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.entity.ai.goal.FollowTargetGoal;
-import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
@@ -19,6 +19,9 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
+import net.minecraft.entity.passive.IronGolemEntity;
+import net.minecraft.entity.passive.TurtleEntity;
+import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -55,32 +58,13 @@ public class NetherGuy extends WitherSkeletonEntity {
     public void doTeleport(BlockPos pos ){
         teleport(pos.getX(), pos.getY(), pos.getZ());
         setPosition(pos.getX(),pos.getY(), pos.getZ());
-        removeTargetGoal();
     }
     @Override
     protected void initGoals() {
-        checkTargetGoal();
-        goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        super.initGoals();
+        goalSelector.add(1, new NetherGuyTargetGoal(this, new PlayerPredicate()));
     }
 
-    protected NetherGuyTargetGoal<PlayerEntity> targetGoal = null;
-    protected boolean shouldRemoveGoal = false;
-
-    protected void removeTargetGoal() {
-        shouldRemoveGoal = true;
-    }
-    protected void checkTargetGoal() {
-        if (shouldRemoveGoal && targetGoal != null) {
-            goalSelector.remove(targetGoal);
-            targetGoal = null;
-            shouldRemoveGoal = false;
-        }
-        if (targetGoal == null) {
-            targetGoal = new NetherGuyTargetGoal<PlayerEntity>(this, PlayerEntity.class,10,
-                    false,false, new PlayerPredicate());
-            this.goalSelector.add(2, targetGoal);
-        }
-    }
 
     protected static ArrayList<WeakReference<NetherGuy>> netherGuys = new ArrayList<WeakReference<NetherGuy>>();
     protected static final int MAX_GUYS_AT_ONCE = 1;
@@ -192,7 +176,6 @@ public class NetherGuy extends WitherSkeletonEntity {
 
     public void tick() {
         super.tick();
-        checkTargetGoal();
 
         if(world.isClient) {
             checkTeleportParticles();
@@ -220,8 +203,8 @@ public class NetherGuy extends WitherSkeletonEntity {
     }
 
 
-    public class PlayerPredicate implements Predicate<LivingEntity> {
-        public boolean test (LivingEntity t) {
+    public static class PlayerPredicate implements Predicate<Entity> {
+        public boolean test (Entity t) {
             PlayerEntityNetherInterface player = (PlayerEntityNetherInterface) t;
             if(player == null) {
                 return false;

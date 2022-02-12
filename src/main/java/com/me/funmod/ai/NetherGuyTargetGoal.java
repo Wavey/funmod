@@ -1,11 +1,14 @@
 package com.me.funmod.ai;
 
 import com.me.funmod.NetherGuy.NetherGuy;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
@@ -14,47 +17,43 @@ import java.util.EnumSet;
 import java.util.function.Predicate;
 
 
-public class NetherGuyTargetGoal<T extends LivingEntity> extends FollowTargetGoal {
+public class NetherGuyTargetGoal extends Goal {
+    protected NetherGuy netherGuy;
+    protected @Nullable Predicate<Entity> targetPredicate;
 
 
-
-    public NetherGuyTargetGoal(MobEntity mob, Class<T> targetClass, boolean checkVisibility) {
-        this(mob, targetClass, checkVisibility, false);
-    }
-
-    public NetherGuyTargetGoal(MobEntity mob, Class<T> targetClass, boolean checkVisibility, boolean checkCanNavigate) {
-        this(mob, targetClass, 10, checkVisibility, checkCanNavigate, (Predicate)null);
-    }
-
-    public NetherGuyTargetGoal(MobEntity mob, Class<T> targetClass, int reciprocalChance, boolean checkVisibility, boolean checkCanNavigate, @Nullable Predicate<LivingEntity> targetPredicate) {
-        super(mob, targetClass, reciprocalChance, checkVisibility, checkCanNavigate, targetPredicate);
+    public NetherGuyTargetGoal(NetherGuy guy, @Nullable Predicate<Entity> targetPredicate) {
+        super();
+        netherGuy = guy;
+        this.targetPredicate = targetPredicate;
         resettimers();
     }
     //protected NetherGuy mob;
     protected BlockPos teleportPos;
     protected int teleportTimer =90;
     protected int visibilitycountdown = 500;
-    protected int distancecountdown = 100;
     protected int navigatecountdown = 100;
+    protected int noTargetCountdown;
+
 
 
 
     protected void resettimers(){
         teleportTimer = 90;
         visibilitycountdown = 500;
-        distancecountdown = 100;
         navigatecountdown = 100;
+        noTargetCountdown = 100;
     }
     protected void teleport(){
         System.out.println("teleporting");
-        ((NetherGuy)this.mob).doTeleport(teleportPos);
-        this.mob.playSound(SoundEvents.ENTITY_SHULKER_TELEPORT,2,1);
+        netherGuy.doTeleport(teleportPos);
+        netherGuy.playSound(SoundEvents.ENTITY_SHULKER_TELEPORT,2,1);
         resettimers();
 
     }
-
-    protected NetherGuy getNetherGuy() {
-        return (NetherGuy) this.mob;
+    @Override
+    public boolean canStart() {
+        return true;
     }
 
     protected void teleporttick(){
@@ -67,23 +66,32 @@ public class NetherGuyTargetGoal<T extends LivingEntity> extends FollowTargetGoa
     }
     public void tick(){
         super.tick();
-        teleportPos = targetEntity.getBlockPos();
-        if (!this.mob.getVisibilityCache().canSee(targetEntity)) {
-            visibilitycountdown--;
-        }else{
-            visibilitycountdown ++;
+        LivingEntity target = netherGuy.getTarget();
+        if (target == null) {
+            // There is no target, so look for a valid player
+            PlayerEntity nearestPlayer = netherGuy.world.getClosestPlayer(
+                    netherGuy.getX(), netherGuy.getY(), netherGuy.getZ(), 100000.0, targetPredicate);
+            if (nearestPlayer != null) {
+                teleportPos = nearestPlayer.getBlockPos();
+                teleporttick();
+            }
         }
-        if (visibilitycountdown <= 0) {
-            teleporttick();
+        else {
+            teleportPos = target.getBlockPos();
+            if (netherGuy.getNavigation().findPathTo(target, 256) == null) {
+                if (navigatecountdown <= 0) {
+                    teleporttick();
+                }
+                else {
+                    navigatecountdown--;
+                }
+            }
+            else {
+                resettimers();
+            }
         }
-        if (this.mob.getNavigation().findPathTo(targetEntity, 256) == null) {
-            navigatecountdown--;
-        }
-        if (navigatecountdown <= 0) {
-            teleporttick();
-        }
-        getNetherGuy().setTeleportPos(teleportPos);
-        getNetherGuy().setTeleportTimer(teleportTimer);
+        netherGuy.setTeleportPos(teleportPos);
+        netherGuy.setTeleportTimer(teleportTimer);
     }
 
 }
