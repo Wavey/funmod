@@ -56,6 +56,15 @@ public class NetherGuyTargetGoal extends Goal {
         return true;
     }
 
+    @Override
+    public boolean canStop() {
+        return false;
+    }
+
+    public void stop() {
+        System.out.println("Nether teleport goal stopping");
+    }
+
     protected void teleporttick(){
         if(this.teleportTimer > 0) {
             this.teleportTimer --;

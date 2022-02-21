@@ -42,14 +42,13 @@ public abstract class Hudmixin extends DrawableHelper  {
         //System.out.println(netherInterface.getNetherTimer());
         //int loop = (netherInterface.getNetherTimer() * 10 +1)/1000 ;
         int loop = (int)Math.ceil((((float)netherInterface.getNetherTimer()) / 100.0) / 6.0 );
-        if (playerEntity.world.getRegistryKey() == World.NETHER)
-
-            while (loop > 0)  {
-
+        if (playerEntity.world.getRegistryKey() == World.NETHER) {
+            while (loop > 0) {
                 this.drawTexture(matrices, scale - offset, this.scaledHeight - 50, 0, 0, 9, 9, 9, 9);
                 offset = offset + 9;
                 loop--;
             }
+        }
     }
 
 }
