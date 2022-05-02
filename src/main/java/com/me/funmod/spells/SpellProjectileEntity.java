@@ -4,7 +4,6 @@ import com.me.funmod.FunMod;
 import com.me.funmod.projectiles.EntitySpawnPacket;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.loader.util.sat4j.core.Vec;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FlyingItemEntity;
@@ -63,9 +62,9 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
         System.out.println("Spawining spell " + this.getSpell().getName());
 
     }
-    public void setProperties(Entity user, float pitch, float yaw, float roll, float divergence) {
+    public void setVelocity(Entity user, float pitch, float yaw, float roll, float divergence) {
         Spell spell = this.getSpell();
-        super.setProperties(user, pitch, yaw, roll, spell.initialSpeed, divergence);
+        super.setVelocity(user, pitch, yaw, roll, spell.initialSpeed, divergence);
     }
 
     protected void initSpells(List<Spell> spells)
@@ -288,8 +287,8 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
     }
 
     static {
-        SPELL = DataTracker.registerData(SpellProjectileEntity.class, TrackedDataHandlerRegistry.TAG_COMPOUND);
-        OTHERSPELLS = DataTracker.registerData(SpellProjectileEntity.class, TrackedDataHandlerRegistry.TAG_COMPOUND);
+        SPELL = DataTracker.registerData(SpellProjectileEntity.class, TrackedDataHandlerRegistry.NBT_COMPOUND);
+        OTHERSPELLS = DataTracker.registerData(SpellProjectileEntity.class, TrackedDataHandlerRegistry.NBT_COMPOUND);
     }
 
 }

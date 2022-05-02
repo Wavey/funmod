@@ -5,8 +5,9 @@ import com.me.funmod.ai.DiamondZombieMovementAI;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.FleeEntityGoal;
-import net.minecraft.entity.ai.goal.FollowTargetGoal;
+//import net.minecraft.entity.ai.goal.FollowMobGoal;
 import net.minecraft.entity.ai.goal.ZombieAttackGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -74,8 +75,9 @@ public class DiamondZombie extends ZombieEntity {
     protected void initGoals() {
         this.goalSelector.add(2, new DiamondZombieMovementAI(this,1.7d,false,this));
 
-        this.goalSelector.add(2,new FollowTargetGoal<PlayerEntity>(this, PlayerEntity.class,false));
+        //this.goalSelector.add(2,new FollowMobGoal<PlayerEntity>(this, PlayerEntity.class,false));
         this.goalSelector.add(2,new DiamondZombieAIGoal(this));
+        this.targetSelector.add(2, new ActiveTargetGoal<PlayerEntity>(this, PlayerEntity.class, true));
 
     }
 

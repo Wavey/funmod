@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 abstract class HungerManagerMixin {
     @Shadow
     private int foodLevel;
-    @Shadow
-    private float foodSaturationLevel;
+    //@Shadow
+    //private float foodSaturationLevel;
     @Shadow
     private float exhaustion;
     @Shadow

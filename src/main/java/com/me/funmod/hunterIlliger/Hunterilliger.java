@@ -1,7 +1,7 @@
 package com.me.funmod.hunterIlliger;
 
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.FollowMobGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;

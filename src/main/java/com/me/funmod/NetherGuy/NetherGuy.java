@@ -6,7 +6,7 @@ import com.me.funmod.general.PlayerEntityNetherInterface;
 import com.me.funmod.mixins.PlayerEntityMixin;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.SkyProperties;
+//import net.minecraft.client.render.SkyProperties;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

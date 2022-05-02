@@ -4,7 +4,7 @@ import com.me.funmod.NetherGuy.NetherGuy;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
-import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.FollowMobGoal;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.mob.MobEntity;
