@@ -45,6 +45,7 @@ public class DiamondZombie extends ZombieEntity {
             tag.putFloat("duration", this.duration);
             return tag;
         }
+        public boolean hurtByFire(){return false;}
 
         public static Effect fromTag(NbtCompound tag) {
 

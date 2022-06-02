@@ -55,6 +55,7 @@ public class NetherGuy extends WitherSkeletonEntity {
 
 
     }
+
     public void doTeleport(BlockPos pos ){
         teleport(pos.getX(), pos.getY(), pos.getZ());
         setPosition(pos.getX(),pos.getY(), pos.getZ());
@@ -62,7 +63,7 @@ public class NetherGuy extends WitherSkeletonEntity {
     @Override
     protected void initGoals() {
         super.initGoals();
-        goalSelector.add(1, new NetherGuyTargetGoal(this, new PlayerPredicate()));
+        goalSelector.add(1, new NetherGuyTargetGoal(this,this.getBlockPos(), new PlayerPredicate()));
     }
 
 

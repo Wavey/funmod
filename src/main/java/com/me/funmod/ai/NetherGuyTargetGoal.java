@@ -22,10 +22,11 @@ public class NetherGuyTargetGoal extends Goal {
     protected @Nullable Predicate<Entity> targetPredicate;
 
 
-    public NetherGuyTargetGoal(NetherGuy guy, @Nullable Predicate<Entity> targetPredicate) {
+    public NetherGuyTargetGoal(NetherGuy guy,BlockPos savedPos,@Nullable Predicate<Entity> targetPredicate) {
         super();
         netherGuy = guy;
         this.targetPredicate = targetPredicate;
+        this.savedPos = savedPos;
         resettimers();
     }
     //protected NetherGuy mob;
@@ -34,15 +35,18 @@ public class NetherGuyTargetGoal extends Goal {
     protected int visibilitycountdown = 500;
     protected int navigatecountdown = 100;
     protected int noTargetCountdown;
+    protected int stuckCountdown;
+    protected BlockPos savedPos;
 
 
 
 
     protected void resettimers(){
-        teleportTimer = 90;
+        teleportTimer = 60;
         visibilitycountdown = 500;
         navigatecountdown = 100;
         noTargetCountdown = 100;
+        stuckCountdown = 80;
     }
     protected void teleport(){
         System.out.println("teleporting");
@@ -75,7 +79,9 @@ public class NetherGuyTargetGoal extends Goal {
     }
     public void tick(){
         super.tick();
+
         LivingEntity target = netherGuy.getTarget();
+
         if (target == null) {
             // There is no target, so look for a valid player
             PlayerEntity nearestPlayer = netherGuy.world.getClosestPlayer(
@@ -96,9 +102,21 @@ public class NetherGuyTargetGoal extends Goal {
                 }
             }
             else {
-                resettimers();
+                if(netherGuy.getBlockPos() == savedPos){
+                    stuckCountdown--;
+                    if(stuckCountdown <= 0){
+                        System.out.println("stuck teleport activate");
+                        teleporttick();
+                    }
+                    System.out.println("stuck" + stuckCountdown);
+                }
+                else {
+                    // Everything is working fine
+                    resettimers();
+                }
             }
         }
+        savedPos = this.netherGuy.getBlockPos();
         netherGuy.setTeleportPos(teleportPos);
         netherGuy.setTeleportTimer(teleportTimer);
     }
