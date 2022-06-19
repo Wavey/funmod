@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98986242-9ffc-4b85-a580-61e526785503" name="Default Changelist" comment="Initial version with newzombie and Healthy Soup">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="98986242-9ffc-4b85-a580-61e526785503" name="Default Changelist" comment="Update for minecraft 1.18.2">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/NetherGuy/NetherGuy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/NetherGuy/NetherGuy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/ai/NetherGuyTargetGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/ai/NetherGuyTargetGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/diamondzombie/DiamondZombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/diamondzombie/DiamondZombie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/Spell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/Spell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/SpellFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/SpellFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/SpellItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/SpellItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/SpellProjectileEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/SpellProjectileEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/WandItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/WandItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/funmod/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/funmod/lang/en_us.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,15 +107,23 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="true" />
+  </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/PlayerEntityMixin.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/ai/NetherGuyTargetGoal.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar://$PROJECT_DIR$/.gradle/loom-cache/1.18.2/net.fabricmc.yarn.1_18_2.1.18.2+build.2-v2/minecraft-project-@-merged-named.jar!/net/minecraft/entity/ai/goal/ActiveTargetGoal.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$PROJECT_DIR$/.gradle/loom-cache/1.18.2/net.fabricmc.yarn.1_18_2.1.18.2+build.2-v2/minecraft-project-@-merged-named.jar!/net/minecraft/entity/mob/ZombieEntity.class" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/NetherGuy/NetherGuy.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/NetherGuy/NetherGuyModel.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/NetherGuy/NetherGuyRenderer.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/ai/DiamondZombieAIGoal.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/spells/SpellProjectileEntity.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/wandstation/WandStationGuiDescription.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/ai/NetherGuyTargetGoal.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/diamondzombie/DZMoveControl.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/diamondzombie/DiamondZombie.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/NetherGuy/NetherGuy.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/Hudmixin.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/mixins/PlayerEntityMixin.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/spells/SpellProjectileEntity.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/me/funmod/wandstation/WandStationGuiDescription.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
@@ -120,38 +131,31 @@
       <facet id="funmod.test/invalid/Minecraft" />
     </ignored-facets>
   </component>
-  <component name="KotlinMultiplatform">
-    <allAvailableExecutables />
-  </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="heddpted" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="1oEOWqdXYxg1s8aZBKwrRQof1s9" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="go.formatter.settings.were.checked" value="true" />
-    <property name="go.import.settings.migrated" value="true" />
-    <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/assets/funmod/textures/entity" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="org.elm.workspace.PROJECT_DISCOVERY" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
+  }
+}</component>
   <component name="ReaderModeSettings">
     <option name="showLigatures" value="true" />
   </component>
@@ -335,6 +339,9 @@
       <workItem from="1630211528341" duration="657000" />
       <workItem from="1631245402272" duration="4320000" />
       <workItem from="1631320688699" duration="2464000" />
+      <workItem from="1655587713222" duration="4027000" />
+      <workItem from="1655665080566" duration="4493000" />
+      <workItem from="1655679741500" duration="1218000" />
     </task>
     <task id="LOCAL-00001" summary="Initial version with newzombie and Healthy Soup">
       <created>1612847383553</created>
@@ -373,13 +380,16 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial version with newzombie and Healthy Soup" />
     <MESSAGE value="Initial particle support" />
     <MESSAGE value="Partial conversion to 1.17.1" />
     <option name="LAST_COMMIT_MESSAGE" value="Partial conversion to 1.17.1" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>false</integration-enabled>
+    <settings-migrated>true</settings-migrated>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -396,6 +406,10 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/funmod$Minecraft_Client.ic" NAME="Minecraft Client Coverage Results" MODIFIED="1628726867683" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
