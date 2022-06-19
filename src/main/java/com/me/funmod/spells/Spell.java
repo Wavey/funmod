@@ -15,23 +15,20 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Spell {
     protected String name;
-    public MovementType movementType = MovementType.Arc;
-    public BlockCollisionType blockCollision = BlockCollisionType.Destroy;
-    public EntityCollisionType entityCollision = EntityCollisionType.Damage;
-    public float initialSpeed = 1.5F;
-    public float entityDamage = 1;
-    public int framesToLive = 80;
+    public MovementType movementType = MovementType.None;
+    public BlockCollisionType blockCollision = BlockCollisionType.None;
+    public EntityCollisionType entityCollision = EntityCollisionType.None;
+    public float initialSpeed = 0;
+    public float entityDamage = 0;
+    public int framesToLive = 0;
 
     public Spell(String name) {
         this.name = name;
-        if(this.movementType == MovementType.Line) {
-            this.initialSpeed *= 10;
-            this.framesToLive = 1;
-        }
     }
     public Spell(String name, MovementType movementType, BlockCollisionType blockCollision, EntityCollisionType entityeCollision,
                  float initialSpeed, float entityDamage, int framesToLive) {
@@ -61,6 +58,21 @@ public class Spell {
         return (s.name.equals(this.name));
     }
 
+    protected void combine(Spell other) {
+        if (other.movementType != MovementType.None) {
+            this.movementType = other.movementType;
+        }
+        if (other.blockCollision != BlockCollisionType.None) {
+            this.blockCollision = other.blockCollision;
+        }
+        if (other.entityCollision != EntityCollisionType.None) {
+            this.entityCollision = other.entityCollision;
+        }
+        initialSpeed += other.initialSpeed;
+        entityDamage += other.entityDamage;
+        framesToLive += other.framesToLive;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -77,12 +89,43 @@ public class Spell {
         world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_WOLF_DEATH, SoundCategory.NEUTRAL, 8,2);
         world.spawnEntity(spellProjectile);
     }
+    public void setFrom(Spell other) {
+        this.framesToLive = other.framesToLive;
+        this.blockCollision = other.blockCollision;
+        this.initialSpeed = other.initialSpeed;
+        this.entityDamage = other.entityDamage;
+        this.entityCollision = other.entityCollision;
+        this.movementType = other.movementType;
+    }
+
+    public List<Spell> parseSpells(List<Spell> spells) {
+        for(int i = 0;i < spells.size(); ++i) {
+            Spell currentSpell = spells.get(i);
+            if (currentSpell.movementType != MovementType.None) {
+                // We have found our projectile
+                setFrom(currentSpell);
+                List<Spell> remainingSpells = new ArrayList<Spell>(spells.subList(i +1, spells.size()));
+                if (i > 0) {
+                    // Modifiers
+                    List<Spell> modifiers = spells.subList(0, i);
+                    for (Spell mod : modifiers) {
+                        combine(mod);
+                    }
+                }
+                return remainingSpells;
+            }
+
+        }
+        return new ArrayList<Spell>();
+    }
 
     public static void spawnSpells(World world, PlayerEntity player, List<Spell> spells) {
         if(spells.size() == 0) {
             return;
         }
-        SpellProjectileEntity spellProjectile = new SpellProjectileEntity(world, player, spells);
+        Spell initialSpell = new Spell("active");
+        List<Spell> remainingSpells = initialSpell.parseSpells(spells);
+        SpellProjectileEntity spellProjectile = new SpellProjectileEntity(world, player, initialSpell, remainingSpells);
         spellProjectile.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 0.0F);
         world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_WOLF_DEATH, SoundCategory.NEUTRAL, 8,2);
         world.spawnEntity(spellProjectile);
@@ -113,16 +156,19 @@ public class Spell {
         return tag;
     }
     public enum MovementType {
+        None,
         Arc,
         Line,
         Straight
     }
     public enum BlockCollisionType {
+        None,
         Die,
         Bounce,
         Destroy
     }
     public enum EntityCollisionType {
+        None,
         Damage,
         Die,
         Swap

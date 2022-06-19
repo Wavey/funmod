@@ -97,12 +97,12 @@ public class WandItem extends Item {
     public static NbtCompound getOrCreateInventoryTag(ItemStack wandStack, boolean createIfNeeded) {
         NbtCompound tag = wandStack.getOrCreateSubNbt("Inventory");
         if(tag.isEmpty() && createIfNeeded) {
-            DefaultedList<ItemStack> items = DefaultedList.ofSize(random.nextInt(2) + 3, ItemStack.EMPTY );
-            for(int i = 0;i < items.size(); ++i) {
-                Item spellItem = SpellFactory.getSpellItem(random.nextInt(5));
-                ItemStack spellItemStack = new ItemStack(spellItem);
-                items.set(i, spellItemStack);
-            }
+            DefaultedList<ItemStack> items = DefaultedList.ofSize(random.nextInt(3) + 3, ItemStack.EMPTY );
+            //for(int i = 0;i < items.size(); ++i) {
+            //    Item spellItem = SpellFactory.getSpellItem(random.nextInt(5));
+            //    ItemStack spellItemStack = new ItemStack(spellItem);
+            //    items.set(i, spellItemStack);
+            //}
             NbtCompound inventoryTag = new NbtCompound();
             Inventories.writeNbt(inventoryTag, items, true);
             tag.put("items", inventoryTag);

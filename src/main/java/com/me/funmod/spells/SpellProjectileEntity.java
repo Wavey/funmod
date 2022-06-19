@@ -50,15 +50,17 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
         super(FunMod.SPELLPROJECTILEENTITY, owner, world);
     }
 
-    public SpellProjectileEntity(double x, double y, double z, World world, Entity owner, List<Spell> spells) {
+    public SpellProjectileEntity(double x, double y, double z, World world, Entity owner, Spell spell, List<Spell> remainingSpells) {
         super(FunMod.SPELLPROJECTILEENTITY, x, y, z, world);
-        this.initSpells(spells);
+        setSpell(spell);
+        setOtherSpells(remainingSpells);
         this.setOwner(owner);
     }
 
-    public SpellProjectileEntity(World world, LivingEntity owner, List<Spell> spells) {
+    public SpellProjectileEntity(World world, LivingEntity owner, Spell spell, List<Spell> remainingSpells) {
         this(world, owner);
-        this.initSpells(spells);
+        setSpell(spell);
+        setOtherSpells(remainingSpells);
         System.out.println("Spawining spell " + this.getSpell().getName());
 
     }
@@ -67,14 +69,6 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
         super.setVelocity(user, pitch, yaw, roll, spell.initialSpeed, divergence);
     }
 
-    protected void initSpells(List<Spell> spells)
-    {
-        this.setSpell(spells.get(0));
-        if(spells.size() > 1) {
-            this.setOtherSpells(spells.subList(1, spells.size()));
-        }
-
-    }
     @Override
     protected Item getDefaultItem() {
         return FunMod.SPELL;
@@ -190,7 +184,10 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
     protected void spawnNextSpell_() {
         List<Spell> spells = this.getOtherSpells();
         if(!spells.isEmpty()) {
-            SpellProjectileEntity spellProjectile = new SpellProjectileEntity(this.getX(), this.getY(), this.getZ(), this.world, this.getOwner(), this.getOtherSpells());
+            Spell spell = new Spell("active");
+            Spell initialSpell = new Spell("active");
+            List<Spell> remainingSpells = initialSpell.parseSpells(spells);
+            SpellProjectileEntity spellProjectile = new SpellProjectileEntity(this.getX(), this.getY(), this.getZ(), this.world, this.getOwner(), spell, remainingSpells);
             Vec3d myVel = this.getVelocity().negate();
             spellProjectile.setVelocity(myVel.x, Math.max(myVel.y + .5F, 1.5F), myVel.z, 1.5F, 3.0F);
             //spellProjectile.setProperties(this, this.pitch - 180F, this.yaw - 180F, 0.0F, 1.5F, 1.0F);

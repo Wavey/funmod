@@ -7,5 +7,15 @@
   "item.funmod.spell2": "Ouchie",
   "item.funmod.spell3": "Destroyer",
   "item.funmod.spell4": "Death Ray",
-  "item.funmod.spell5": "Swapper"
+  "item.funmod.spell5": "Swapper",
+  "item.funmod.spell_arcprojectile": "Arc Projectile",
+  "item.funmod.spell_damageentities": "Damage Entities",
+  "item.funmod.spell_bounceoffblocks": "Bounce Off Blocks",
+  "item.funmod.spell_destroyblocks": "Destroy Blocks",
+  "item.funmod.spell_deathrayprojectile": "DeathRay Projectile",
+  "item.funmod.spell_speed2": "Double Speed",
+  "item.funmod.spell_moredamage": "More Damage",
+  "item.funmod.spell_lessdamage": "Less Damage",
+  "item.funmod.spell_livelonger": "Live Longer",
+  "item.funmod.spell_teleportonhit": "Teleport On Hit"
 }
