@@ -4,6 +4,8 @@ import com.me.funmod.FunMod;
 import com.me.funmod.projectiles.EntitySpawnPacket;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FlyingItemEntity;
@@ -88,6 +90,9 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
         SpellProjectileEntity spellProjectile = new SpellProjectileEntity(pos.getX(), pos.getY(), pos.getZ(),
                 world, player, initialSpell, remainingSpells);
         spellProjectile.setNoGravity(initialSpell.movementType != Spell.MovementType.Arc);
+        if (initialSpell.fireTime > 0) {
+            spellProjectile.setOnFireFor(100);
+        }
         world.spawnEntity(spellProjectile);
         return spellProjectile;
     }
@@ -153,6 +158,9 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
 
     protected void onEntityHit(EntityHitResult hitResult) {
         Spell spell = this.getSpell();
+        if (spell.fireTime > 0) {
+            hitResult.getEntity().setOnFireFor(spell.fireTime);
+        }
         switch (spell.entityCollision) {
             case Swap:
                 this.SwapOwnerWithEntity(hitResult);

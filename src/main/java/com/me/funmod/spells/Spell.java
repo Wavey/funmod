@@ -28,12 +28,13 @@ public class Spell {
     public float initialSpeed = 0;
     public float entityDamage = 0;
     public int framesToLive = 0;
+    public int fireTime = 0;
 
     public Spell(String name) {
         this.name = name;
     }
     public Spell(String name, MovementType movementType, BlockCollisionType blockCollision, EntityCollisionType entityeCollision,
-                 float initialSpeed, float entityDamage, int framesToLive) {
+                 float initialSpeed, float entityDamage, int fireTime, int framesToLive) {
         this.name = name;
         this.movementType = movementType;
         this.blockCollision = blockCollision;
@@ -41,10 +42,11 @@ public class Spell {
         this.initialSpeed = initialSpeed;
         this.entityDamage = entityDamage;
         this.framesToLive = framesToLive;
+        this.fireTime = fireTime;
 
         if(this.movementType == MovementType.Line) {
             this.initialSpeed *= 10;
-            this.framesToLive = 1;
+            this.framesToLive = 2;
         }
     }
     @Override
@@ -72,6 +74,7 @@ public class Spell {
         }
         initialSpeed += other.initialSpeed;
         entityDamage += other.entityDamage;
+        fireTime += other.fireTime;
         framesToLive += other.framesToLive;
     }
 
@@ -93,6 +96,7 @@ public class Spell {
     }
     public void setFrom(Spell other) {
         this.framesToLive = other.framesToLive;
+        this.fireTime = other.fireTime;
         this.blockCollision = other.blockCollision;
         this.initialSpeed = other.initialSpeed;
         this.entityDamage = other.entityDamage;
@@ -149,6 +153,7 @@ public class Spell {
         spell.entityCollision = EntityCollisionType.values()[tag.getInt("entityCollision")];
         spell.blockCollision = BlockCollisionType.values()[tag.getInt("blockCollision")];
         spell.movementType = MovementType.values()[tag.getInt("movementType")];
+        spell.fireTime = tag.getInt("fireTime");
         spell.initialSpeed = tag.getFloat("initialSpeed");
         spell.entityDamage = tag.getFloat("entityDamage");
         return spell;
@@ -161,6 +166,7 @@ public class Spell {
         tag.putInt("movementType", this.movementType.ordinal());
         tag.putInt("blockCollision", this.blockCollision.ordinal());
         tag.putInt("entityCollision", this.entityCollision.ordinal());
+        tag.putFloat("fireTime", this.fireTime);
         tag.putFloat("initialSpeed", this.initialSpeed);
         tag.putFloat("entityDamage", this.entityDamage);
         tag.putInt("framesToLive", this.framesToLive);
