@@ -23,9 +23,16 @@ public class SpellFactory {
                     Spell.MovementType.Arc,
                     Spell.BlockCollisionType.Die,
                     Spell.EntityCollisionType.Die,
-                    1.5f,
-                    100,
-                     80 ),
+                    1.0f,
+                    10,
+                     40 ),
+            new Spell("StraightProjectile",
+                    Spell.MovementType.Straight,
+                    Spell.BlockCollisionType.Die,
+                    Spell.EntityCollisionType.Die,
+                    1.0f,
+                    10,
+                    40 ),
             new Spell("DamageEntities",
                     Spell.MovementType.None,
                     Spell.BlockCollisionType.None,
@@ -53,12 +60,12 @@ public class SpellFactory {
                     Spell.EntityCollisionType.Die,
                     1.5f * 10.0f,
                     5,
-                    1 ),
+                    2 ),
             new Spell("Speed2",
                     Spell.MovementType.None,
                     Spell.BlockCollisionType.None,
                     Spell.EntityCollisionType.None,
-                    1.5f,
+                    1.0f,
                     0,
                     0 ),
             new Spell("MoreDamage",
@@ -93,7 +100,7 @@ public class SpellFactory {
 
     static public void initSpells() {
         for(Spell spell : spells) {
-            SpellItem item = new SpellItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1));
+            SpellItem item = new SpellItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(64));
             SPELL_ITEMS.add(item);
             Registry.register(Registry.ITEM, new Identifier("funmod", String.format("spell_%s", spell.name.toLowerCase())),
                     item);

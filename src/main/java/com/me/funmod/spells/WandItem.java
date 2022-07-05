@@ -49,24 +49,12 @@ public class WandItem extends Item {
         }
 
 
-        System.out.println("Casting: " + getSpellDebugNames(spells));
         //spells.get(0).doTheThing(world,user);
-        Spell.spawnSpells(world, user, spells);
+        Spell.fireSpellsFromEntity(world, user, spells);
         return TypedActionResult.pass(itemStack);
 
     }
 
-    private static String getSpellDebugNames(List<Spell> spells) {
-        if(spells.isEmpty()) {
-            return "Empty";
-        }
-
-        ArrayList<String> spellNames = new ArrayList<String>(spells.size());
-        for(Spell s : spells) {
-            spellNames.add(s.getName());
-        }
-        return String.join(" - ", spellNames);
-    }
 
     public static List<Spell> getOrCreateSpells(ItemStack wandStack, boolean createIfNeeded) {
         ArrayList<Spell> spells = new ArrayList<Spell>();
@@ -115,7 +103,7 @@ public class WandItem extends Item {
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         List<Spell> spells = WandItem.getOrCreateSpells(stack, false);
-        tooltip.add(new LiteralText(getSpellDebugNames(spells)));
+        tooltip.add(new LiteralText(Spell.getSpellDebugNames(spells)));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.me.funmod.spells;
 
+import com.me.funmod.spells.SpellProjectileEntity;
 import com.me.funmod.projectiles.ZombieProjectile;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -13,6 +14,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -119,20 +121,29 @@ public class Spell {
         return new ArrayList<Spell>();
     }
 
-    public static void spawnSpells(World world, PlayerEntity player, List<Spell> spells) {
-        if(spells.size() == 0) {
+    public static void fireSpellsFromEntity(World world, PlayerEntity player, List<Spell> spells) {
+        Vec3d playerPos = new Vec3d(player.getX(), player.getEyeY()- .1, player.getZ());
+        SpellProjectileEntity spellProjectile = SpellProjectileEntity.createFromSpells(world, player,
+                playerPos,spells);
+        if (spellProjectile == null) {
             return;
         }
-        Spell initialSpell = new Spell("active");
-        List<Spell> remainingSpells = initialSpell.parseSpells(spells);
-        SpellProjectileEntity spellProjectile = new SpellProjectileEntity(world, player, initialSpell, remainingSpells);
         spellProjectile.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 0.0F);
         world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_WOLF_DEATH, SoundCategory.NEUTRAL, 8,2);
-        world.spawnEntity(spellProjectile);
+    }
+    public static String getSpellDebugNames(List<Spell> spells) {
+        if(spells.isEmpty()) {
+            return "Empty";
+        }
+
+        ArrayList<String> spellNames = new ArrayList<String>(spells.size());
+        for(Spell s : spells) {
+            spellNames.add(s.getName());
+        }
+        return String.join(" - ", spellNames);
     }
 
     public static Spell fromTag(NbtCompound tag) {
-
         Spell spell = new Spell(tag.getString("name"));
         spell.framesToLive = tag.getInt("framesToLive");
         spell.entityCollision = EntityCollisionType.values()[tag.getInt("entityCollision")];

@@ -32,6 +32,9 @@ public class DiamondZombieAIGoal extends Goal {
 
     public void tick() {
         PlayerEntity nearestPlayer = this.mob.world.getClosestPlayer(this.mob.getX(), this.mob.getY(), this.mob.getZ(), 100, false);
+        if (nearestPlayer == null) {
+            return;
+        }
         double d = this.mob.squaredDistanceTo(nearestPlayer.getX(), nearestPlayer.getY(), nearestPlayer.getZ());
         teleporttick();
         this.decisionTimer --;
