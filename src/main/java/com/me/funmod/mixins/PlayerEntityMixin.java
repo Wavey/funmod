@@ -23,6 +23,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
     PlayerEntityMixin(EntityType<? extends PlayerEntity> entity, World world) {
         super( entity, world);
     }
+    public int mana;
+
     public int nethertimer;
     private static TrackedData<Integer> NETHER_TIMER;
     private void nethertimerticksubtract(){

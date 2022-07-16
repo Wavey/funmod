@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="98986242-9ffc-4b85-a580-61e526785503" name="Default Changelist" comment="Update for minecraft 1.18.2">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" afterDir="false" />
@@ -14,6 +15,10 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/SpellProjectileEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/SpellProjectileEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/WandItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/me/funmod/spells/WandItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/assets/funmod/lang/en_us.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/funmod/lang/en_us.json" afterDir="false" />
+=======
+    <list default="true" id="98986242-9ffc-4b85-a580-61e526785503" name="Default Changelist" comment="Initial version with newzombie and Healthy Soup">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
