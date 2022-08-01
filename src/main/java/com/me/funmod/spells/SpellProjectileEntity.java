@@ -179,7 +179,8 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
     }
 
     public void tick() {
-        oldPos = new Vec3d(getX(), getY(), getZ());
+        Vec3d vel = getVelocity();
+        Vec3d pos = getPos();
         super.tick();
         if(this.invicibilityTimer > 0) {
             this.invicibilityTimer -= 1;
@@ -187,9 +188,17 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
         this.aliveTimer += 1;
         Spell spell = this.getSpell();
 
+        if (spell.movementType == Spell.MovementType.CastOnSelf) {
+            this.aliveTimer = spell.framesToLive + 1;
+            Entity owner = getOwner();
+            if (owner != null) {
+                onEntityHit(new EntityHitResult(getOwner()));
+            }
+        }
+
         if(this.world.isClient) {
             if(spell.movementType == Spell.MovementType.Line) {
-                this.produceParticlesAlongLine(ParticleTypes.DRAGON_BREATH, oldPos, getPos());
+                this.produceParticlesAlongLine(ParticleTypes.DRAGON_BREATH, pos, pos.add(vel.normalize().multiply(200)));
             }
             else {
                 this.produceParticlesFromPoint(ParticleTypes.DRAGON_BREATH, getPos());
@@ -209,12 +218,27 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
             if (spellProjectile == null) {
                 return;
             }
-            Vec3d myVel = this.getVelocity().negate();
+            Spell currentSpell = getSpell();
+            Vec3d myVel = this.getVelocity();
+            if (currentSpell.movementType != Spell.MovementType.CastOnSelf) {
+                myVel = myVel.negate();
+                myVel = myVel.add(0, Math.max(myVel.y +.5, 1.5), 0);
+            }
+
             spellProjectile.setVelocity(myVel.x, Math.max(myVel.y + .5F, 1.5F), myVel.z, 1.5F, 3.0F);
             world.playSound((PlayerEntity) owner, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_WOLF_DEATH, SoundCategory.NEUTRAL, 8, 2);
         }
 
     }
+    @Override
+    public void setVelocity(double x, double y, double z, float speed, float divergence) {
+        //if (getSpell().movementType == Spell.MovementType.CastOnSelf) {
+        //    speed = .1f;
+        //    divergence = 0;
+        //}
+        super.setVelocity(x, y, z, speed, divergence);
+    }
+
 
     @Environment(EnvType.CLIENT)
     public void produceParticlesFromPoint(ParticleEffect parameters, Vec3d pos) {

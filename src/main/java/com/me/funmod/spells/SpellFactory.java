@@ -15,10 +15,18 @@ public class SpellFactory {
 
     static private final HashMap<SpellItem, Spell> spellItemToSpell = new HashMap<SpellItem, Spell>();
     static private final HashMap<Spell, SpellItem> spellToSpellItem = new HashMap<Spell, SpellItem>();
-    public static final List<SpellItem> SPELL_ITEMS = new ArrayList<SpellItem>(5);
+    public static final List<SpellItem> SPELL_ITEMS = new ArrayList<SpellItem>(13);
     static private Spell defaultSpell;
     static private SpellItem defaultSpellItem;
     static private List<Spell> spells = new ArrayList<Spell> (Arrays.asList(
+            new Spell("CastOnSelf",
+                    Spell.MovementType.CastOnSelf,
+                    Spell.BlockCollisionType.None,
+                    Spell.EntityCollisionType.None,
+                    0.0f,
+                    0,
+                    0,
+                    1 ),
             new Spell("ArcProjectile",
                     Spell.MovementType.Arc,
                     Spell.BlockCollisionType.Die,

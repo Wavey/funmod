@@ -176,7 +176,8 @@ public class Spell {
         None,
         Arc,
         Line,
-        Straight
+        Straight,
+        CastOnSelf
     }
     public enum BlockCollisionType {
         None,

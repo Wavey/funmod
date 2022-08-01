@@ -19,5 +19,7 @@
   "item.funmod.spell_lessdamage": "Less Damage",
   "item.funmod.spell_livelonger": "Live Longer",
   "item.funmod.spell_fire": "Fire",
-  "item.funmod.spell_teleportonhit": "Teleport On Hit"
+  "item.funmod.spell_teleportonhit": "Teleport On Hit",
+  "item.funmod.spell_castonself": "Cast On Self",
+  "block.funmod.wandstation_block": "Wand Station"
 }

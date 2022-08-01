@@ -39,9 +39,9 @@ public class WandStationGuiDescription extends SyncedGuiDescription {
         setupSpellInventory(root);
 
         WItemSlot wandSlot = WItemSlot.of(wandInventory, 0, wandInventory.size(), 1);
-        root.add(wandSlot, 0, 1);
+        root.add(wandSlot, 1, 1);
 
-        root.add(this.createPlayerInventoryPanel(), 0, 3);
+        root.add(this.createPlayerInventoryPanel(), 1, 3);
 
         root.validate(this);
     }
