@@ -1,10 +1,14 @@
 package com.me.funmod.spells;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,6 +22,9 @@ public class SpellFactory {
     public static final List<SpellItem> SPELL_ITEMS = new ArrayList<SpellItem>(13);
     static private Spell defaultSpell;
     static private SpellItem defaultSpellItem;
+    @Nullable
+    static private StatusEffectInstance status = null;
+    static private StatusEffectInstance poison1 = new StatusEffectInstance(StatusEffects.POISON, 200, 1);
     static private List<Spell> spells = new ArrayList<Spell> (Arrays.asList(
             new Spell("CastOnSelf",
                     Spell.MovementType.CastOnSelf,
@@ -26,15 +33,17 @@ public class SpellFactory {
                     0.0f,
                     0,
                     0,
-                    1 ),
+                    1,
+                     null),
             new Spell("ArcProjectile",
                     Spell.MovementType.Arc,
                     Spell.BlockCollisionType.Die,
                     Spell.EntityCollisionType.Die,
-                    1.0f,
+                    0.5f,
                     10,
                     0,
-                     40 ),
+                     80,
+                    null),
             new Spell("StraightProjectile",
                     Spell.MovementType.Straight,
                     Spell.BlockCollisionType.Die,
@@ -42,7 +51,8 @@ public class SpellFactory {
                     1.0f,
                     10,
                     0,
-                    40 ),
+                    40 ,
+                    null),
             new Spell("DamageEntities",
                     Spell.MovementType.None,
                     Spell.BlockCollisionType.None,
@@ -50,7 +60,8 @@ public class SpellFactory {
                     0,
                     0,
                     0,
-                    0 ),
+                    0 ,
+                    null),
             new Spell("BounceOffBlocks",
                     Spell.MovementType.None,
                     Spell.BlockCollisionType.Bounce,
@@ -58,7 +69,8 @@ public class SpellFactory {
                     0,
                     0,
                     0,
-                    0 ),
+                    0,
+                    null),
             new Spell("DestroyBlocks",
                     Spell.MovementType.None,
                     Spell.BlockCollisionType.Destroy,
@@ -66,7 +78,8 @@ public class SpellFactory {
                     0,
                     0,
                     0,
-                    0 ),
+                    0 ,
+                    null),
             new Spell("DeathRayProjectile",
                     Spell.MovementType.Line,
                     Spell.BlockCollisionType.Die,
@@ -74,7 +87,8 @@ public class SpellFactory {
                     1.5f * 10.0f,
                     5,
                     0,
-                    2 ),
+                    2 ,
+                    null),
             new Spell("Speed2",
                     Spell.MovementType.None,
                     Spell.BlockCollisionType.None,
@@ -82,7 +96,8 @@ public class SpellFactory {
                     1.0f,
                     0,
                     0,
-                    0 ),
+                    0,
+                    null),
             new Spell("MoreDamage",
                     Spell.MovementType.None,
                     Spell.BlockCollisionType.None,
@@ -90,7 +105,8 @@ public class SpellFactory {
                     0.0f,
                     30,
                     0,
-                    0 ),
+                    0 ,
+                    null),
             new Spell("LessDamage",
                     Spell.MovementType.None,
                     Spell.BlockCollisionType.None,
@@ -98,7 +114,8 @@ public class SpellFactory {
                     0.0f,
                     -30,
                     0,
-                    0 ),
+                    0 ,
+                    null),
             new Spell("LiveLonger",
                     Spell.MovementType.None,
                     Spell.BlockCollisionType.None,
@@ -106,7 +123,8 @@ public class SpellFactory {
                     0.0f,
                     0,
                     0,
-                    30 ),
+                    30,
+                    null),
             new Spell("Fire",
                     Spell.MovementType.None,
                     Spell.BlockCollisionType.None,
@@ -114,7 +132,8 @@ public class SpellFactory {
                     0.0f,
                     0,
                     10,
-                    0 ),
+                    0 ,
+                    null),
             new Spell("TeleportOnHit",
                     Spell.MovementType.None,
                     Spell.BlockCollisionType.None,
@@ -122,7 +141,66 @@ public class SpellFactory {
                     0.0f,
                     0,
                     0,
-                    0 )));
+                    0 ,
+                    null),
+
+            new Spell("poison",
+                      Spell.MovementType.None,
+                    Spell.BlockCollisionType.None,
+                    Spell.EntityCollisionType.PotionEffect,
+                    0.0f,
+                    0,
+                    0,
+                    0,
+                    new StatusEffectInstance(StatusEffects.POISON, 200, 0)),
+            new Spell("float",
+                    Spell.MovementType.None,
+                    Spell.BlockCollisionType.None,
+                    Spell.EntityCollisionType.PotionEffect,
+                    0.0f,
+                    0,
+                    0,
+                    0,
+                    new StatusEffectInstance(StatusEffects.SLOW_FALLING, 100, 10)),
+            new Spell("bigfloat",
+                    Spell.MovementType.None,
+                    Spell.BlockCollisionType.None,
+                    Spell.EntityCollisionType.PotionEffect,
+                    0.0f,
+                    0,
+                    0,
+                    0,
+                    new StatusEffectInstance(StatusEffects.LEVITATION, 15, 2)),
+            new Spell("dash",
+                    Spell.MovementType.None,
+                    Spell.BlockCollisionType.None,
+                    Spell.EntityCollisionType.PotionEffect,
+                    0.0f,
+                    0,
+                    0,
+                    0,
+                    new StatusEffectInstance(StatusEffects.SPEED, 8, 50)),
+            new Spell("Blast",
+                    Spell.MovementType.None,
+                    Spell.BlockCollisionType.Blast,
+                    Spell.EntityCollisionType.Blast,
+                    0.0f,
+                    0,
+                    0,
+                    0 ,
+                    null),
+            new Spell("Anvil",
+                    Spell.MovementType.None,
+                    Spell.BlockCollisionType.Blast,
+                    Spell.EntityCollisionType.Blast,
+                    0.0f,
+                    0,
+                    0,
+                    0 ,
+                    null)
+            ));
+
+
 
 
     static public void initSpells() {

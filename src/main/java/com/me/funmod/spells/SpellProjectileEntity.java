@@ -2,18 +2,18 @@ package com.me.funmod.spells;
 
 import com.me.funmod.FunMod;
 import com.me.funmod.projectiles.EntitySpawnPacket;
+import com.sun.jna.platform.win32.WinBase;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.AnvilBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.FlyingItemEntity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
@@ -24,14 +24,17 @@ import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stat;
 import net.minecraft.util.Util;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +47,10 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
     private int blocksHit = 0;
     private Vec3d oldPos;
     private int invicibilityTimer = 1;
+    public BlockPos pos ;
+    public BlockPos boxPos1 = new BlockPos(0,0,0);
+    public BlockPos boxPos2 = new BlockPos(0,0,0);;
+
     public SpellProjectileEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -104,6 +111,22 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
         System.out.println("Spell " + spell.getName() + " just died");
     }
 
+    protected void applyPush(Entity e, double radius) {
+        Vec3d diff = e.getPos().subtract(getPos());
+        Vec3d nDiff = diff.normalize();
+        double dist = diff.length();
+        double force = 1.0 - (dist / radius);
+        if (force > 0) {
+            e.addVelocity(force * nDiff.x,1,force * nDiff.z);
+        }
+    }
+
+    protected List<Entity> getEntitiesWithinRadius(double radius) {
+        boxPos1 = boxPos1.add(this.getX()+radius,this.getY()+radius,this.getZ()+radius);
+        boxPos2 = boxPos2.add(this.getX()-radius,this.getY()-radius,this.getZ()-radius);
+        return world.getOtherEntities(null, new Box(boxPos1,boxPos2));
+    }
+
     protected void onBlockHit(BlockHitResult hitResult) {
         super.onBlockHit(hitResult);
         if (!this.world.isClient) {
@@ -113,6 +136,12 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
             Spell spell = this.getSpell();
             switch(spell.blockCollision) {
                 case Die:
+                    die();
+                    break;
+                case Blast:
+                    for (Entity e: getEntitiesWithinRadius(5.0)){
+                        applyPush(e, 5.0);
+                    }
                     die();
                     break;
                 case Bounce:
@@ -161,7 +190,26 @@ public class SpellProjectileEntity  extends ThrownItemEntity implements FlyingIt
         if (spell.fireTime > 0) {
             hitResult.getEntity().setOnFireFor(spell.fireTime);
         }
+        LivingEntity livingEntity = (LivingEntity)hitResult.getEntity();
+        if (livingEntity != null){
+            for (StatusEffectInstance s: spell.effects) {
+                // Make sure to use a copy here as the instance has state
+                livingEntity.addStatusEffect(new StatusEffectInstance(s));
+            }
+
+        }
+
         switch (spell.entityCollision) {
+            case Blast:
+                for (Entity e: getEntitiesWithinRadius(5.0)){
+                    applyPush(e, 5.0);
+                }
+                die();
+                break;
+            case Anvil:
+
+                die();
+                break;
             case Swap:
                 this.SwapOwnerWithEntity(hitResult);
                 die();

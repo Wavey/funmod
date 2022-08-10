@@ -4,6 +4,8 @@ import com.me.funmod.spells.SpellProjectileEntity;
 import com.me.funmod.projectiles.ZombieProjectile;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.SmallFireballEntity;
@@ -16,9 +18,10 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.Nullable;
+import java.util.*;
 
 public class Spell {
     protected String name;
@@ -29,12 +32,14 @@ public class Spell {
     public float entityDamage = 0;
     public int framesToLive = 0;
     public int fireTime = 0;
+    public List<StatusEffectInstance> effects = new ArrayList<>();
+
 
     public Spell(String name) {
         this.name = name;
     }
     public Spell(String name, MovementType movementType, BlockCollisionType blockCollision, EntityCollisionType entityeCollision,
-                 float initialSpeed, float entityDamage, int fireTime, int framesToLive) {
+                 float initialSpeed, float entityDamage, int fireTime, int framesToLive, StatusEffectInstance statusEffect) {
         this.name = name;
         this.movementType = movementType;
         this.blockCollision = blockCollision;
@@ -43,12 +48,18 @@ public class Spell {
         this.entityDamage = entityDamage;
         this.framesToLive = framesToLive;
         this.fireTime = fireTime;
+        if(statusEffect != null) {
+            effects.add(statusEffect);
+        }
+
+
 
         if(this.movementType == MovementType.Line) {
             this.initialSpeed *= 10;
             this.framesToLive = 2;
         }
     }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -72,6 +83,7 @@ public class Spell {
         if (other.entityCollision != EntityCollisionType.None) {
             this.entityCollision = other.entityCollision;
         }
+        this.effects.addAll(other.effects);
         initialSpeed += other.initialSpeed;
         entityDamage += other.entityDamage;
         fireTime += other.fireTime;
@@ -102,6 +114,8 @@ public class Spell {
         this.entityDamage = other.entityDamage;
         this.entityCollision = other.entityCollision;
         this.movementType = other.movementType;
+        this.effects = new ArrayList<>();
+        this.effects.addAll(other.effects);
     }
 
     public List<Spell> parseSpells(List<Spell> spells) {
@@ -156,6 +170,18 @@ public class Spell {
         spell.fireTime = tag.getInt("fireTime");
         spell.initialSpeed = tag.getFloat("initialSpeed");
         spell.entityDamage = tag.getFloat("entityDamage");
+
+        spell.effects = new ArrayList<StatusEffectInstance>();
+
+        NbtCompound effectTag = tag.getCompound("effects");
+        int count = 0;
+        while(effectTag.contains(String.valueOf(count))) {
+            NbtCompound etag = effectTag.getCompound(String.valueOf(count));
+            StatusEffectInstance instance = StatusEffectInstance.fromNbt(etag);
+            spell.effects.add(instance);
+            count ++;
+        }
+
         return spell;
     }
     public static final Spell EMPTY = new Spell("empty");
@@ -170,6 +196,16 @@ public class Spell {
         tag.putFloat("initialSpeed", this.initialSpeed);
         tag.putFloat("entityDamage", this.entityDamage);
         tag.putInt("framesToLive", this.framesToLive);
+        NbtCompound effectTag = new NbtCompound();
+        int count = 0;
+        for (StatusEffectInstance s: this.effects) {
+            NbtCompound stag = new NbtCompound();
+            s.writeNbt(stag);
+            effectTag.put(String.valueOf(count), stag);
+            count ++;
+        }
+        tag.put("effects", effectTag);
+
         return tag;
     }
     public enum MovementType {
@@ -181,15 +217,20 @@ public class Spell {
     }
     public enum BlockCollisionType {
         None,
+        Anvil,
         Die,
         Bounce,
-        Destroy
+        Destroy,
+        Blast
     }
     public enum EntityCollisionType {
         None,
+        Anvil,
         Damage,
         Die,
-        Swap
+        Swap,
+        PotionEffect,
+        Blast
     }
 
 }
